@@ -1,0 +1,18 @@
+.page{
+    max-width: 1200px;
+    background-color: #000000;
+    margin: 0 auto;
+}
+
+.header{
+    max-width: 882px;
+    border-bottom: 1px solid #545454;
+    margin: 0 auto;
+    padding: 45px 0 41px 3px;   
+}
+
+.logo{
+width: 173px;
+height: 33px;
+}
+
