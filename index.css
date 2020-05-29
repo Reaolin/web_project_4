@@ -34,7 +34,6 @@ margin: 41px auto 0;
 }
 .profile-info{
     display: flex;
-    flex-direction: column;
     max-width: 428px;
     width: 100%;
 }
@@ -61,6 +60,7 @@ margin: 41px auto 0;
     background-color: #000000;
     background-repeat: no-repeat;
     border: 1px solid #ffffff;
+    margin: 37px 0 0 27px;
 }
 
 .profile__add-btn{
@@ -95,12 +95,19 @@ margin: 41px auto 0;
 }
 .card__info{
     display: flex;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
     justify-content: space-between;
     max-width: 246px;
     padding: 25px 15px 31px 21px;
+}
+.card__title{
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    margin: 0;
 }
 
 .footer{
