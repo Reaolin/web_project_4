@@ -68,11 +68,13 @@
                 <div class="modal__content">
                 <h3 class="modal__title">Edit profile</h3>
                 <form action="#" class="form">
-                    <input type="text" class="form__name-input" value="name">
-                    <input type="text" class="form__job-input" value="occupation">
+                    <input type="text" name="name" class="form__name-input" value="name">
+                    <input type="text" name="occupation" class="form__job-input" value="occupation">
+                    
+                    <button type="submit" class="modal__save">Save</button> <!-- Buttons have to be within the class you are calling for JavaScript
+                    otherwise it won't talk-->
                 </form>
                 <button class="modal__close"></button>
-                <button type="submit" class="modal__save">Save</button>
             </div>
             </div>
         </div>
