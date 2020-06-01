@@ -1,0 +1,9 @@
+.link:hover{
+    opacity: .6;
+    cursor: url('./images/mouse.svg'), auto;
+}
+
+.link_save-btn:hover{
+    opacity: .8;
+    cursor: url('./images/mouse.svg'), auto;
+}
