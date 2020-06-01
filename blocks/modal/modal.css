@@ -3,7 +3,6 @@
 @import url('./__content/modal__content.css');
 @import url('./__save/modal__save.css');
 @import url('./__title/modal__title.css');
-@import url('./_display/modal_display.css');
 
 .modal{
     background: rgba(0, 0, 0, 0.5); 
