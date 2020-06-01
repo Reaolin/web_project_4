@@ -4,7 +4,7 @@
     height: 40.17px;
     top: -41px;
     right: -41px;
-    background-image: url('../../../images/Close\ Icon.png');
+    background-image: url('../../../images/Close_icon.svg'); /* Thanks for the tip!*/
     background-repeat: no-repeat;
     background-position: center;
     background-color: #000000;

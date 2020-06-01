@@ -1,4 +1,4 @@
-.modal__save{
+.form__save{
     background: black;
     width: 358px;
     height: 50.15px;
@@ -7,4 +7,9 @@
     line-height: 22px;
     text-align: center;
 
+}
+
+.form__save:hover{
+    opacity: .8;
+    cursor: url('../../../images/mouse.svg'), auto;
 }

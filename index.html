@@ -18,49 +18,51 @@
                     <h1 class="profile-info__title">Jacques Cousteau</h1>
                     <p class="profile-info__sub-title">Explorer</p>
                 </div>
-                    <button class="profile__edit-btn link"></button>
+                    <button class="profile__edit-btn link"></button> 
                 </div>
             
             <button class="profile__add-btn link"></button>
             </section>
+            <section class="photo-container">
             <ul class="photo-grid">
                 <li class="card">
                     <img src="./images/Yosemite.png" alt="Yosemite" class="card__img">
                     <div class="card__info">
                         <h2 class="card__title">Yosemite</h2>
-                        <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                        <button class="card__heart"></button>
                 </li>
                 <li class="card">
                     <img src="./images/Lake Louise.png" alt="Lake Louise" class="card__img">
                     <div class="card__info">
                         <h2 class="card__title">Lake Louise</h2>
-                        <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                        <button class="card__heart"></button>
                 </li>
                 <li class="card">
                     <img src="./images/bald mnt.png" alt="Bald Mountains" class="card__img">
                     <div class="card__info">
                         <h2 class="card__title">Bald Mountains</h2>
-                        <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                        <button class="card__heart"></button>
                 </li>
                 <li class="card">
                     <img src="./images/Latemar.png" alt="Latemar" class="card__img">
                     <div class="card__info">
                     <h2 class="card__title">Latemar</h2>
-                    <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                    <button class="card__heart"></button>
                 </li>
                 <li class="card">
                     <img src="./images/Vanoise Natl.png" alt="Vanois National" class="card__img">
                     <div class="card__info">
                         <h2 class="card__title">Vanoise National Park</h2>
-                        <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                        <button class="card__heart"></button>
                 </li>
                 <li class="card">
                     <img src="./images/Lago di Braies.png" alt="Lago di Braies" class="card__img">
                     <div class="card__info">
                         <h2 class="card__title">Lago di Braies</h2>
-                        <img src="./images/heart.svg" alt="heart" class="card__heart"></div>
+                        <button class="card__heart"></button>
                 </li>
             </ul>
+        </section>
         </main>
         <footer class="footer">&copy; 2020 Around the U.S.</footer>
         <div class="modal">
@@ -71,7 +73,8 @@
                     <input type="text" name="name" class="form__name-input" value="name">
                     <input type="text" name="occupation" class="form__job-input" value="occupation">
                     
-                    <button type="submit" class="modal__save link_save-btn">Save</button> <!-- Buttons have to be within the class you are calling for JavaScript
+                    <button type="submit" class="form__save">Save</button> <!--Thank you for calling this out. Makes it much cleaner.  I was a little worried I'd forget a step when going back and changing everything, but it worked!!-->
+                    <!-- Buttons have to be within the class you are calling for JavaScript
                     otherwise it won't talk-->
                 </form>
                 <button class="modal__close link"></button>

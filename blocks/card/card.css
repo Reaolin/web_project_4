@@ -1,5 +1,6 @@
 @import url('./__info/card__info.css');
 @import url('./__title/card__title.css');
+@import url('./__heart/card__heart.css');
 
 .card{
     background-color: white;

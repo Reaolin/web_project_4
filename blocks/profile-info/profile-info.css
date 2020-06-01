@@ -5,6 +5,13 @@
     display: flex;
     max-width: 428px;
     width: 100%;
+ 
+}
+
+@media screen and (max-width: 900px){
+    .profile-info{
+        max-width: 250px;
+    }
 }
 
     @media screen and (max-width: 590px){
