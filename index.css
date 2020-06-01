@@ -228,6 +228,7 @@ margin: 41px auto 0;
         grid-template-columns: repeat(2, 282px);
         justify-content: center;
     }
+    
     .profile-info__title{
         font-size: 22px;
     }

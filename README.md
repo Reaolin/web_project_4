@@ -2,15 +2,33 @@
 
 ### Overview
 
+* Intro
+* Technologies Used
+* Github Link
+
+
+
+**Intro**
+
+This is a project about taking pictures and creating a personal profile for yourself. We've made it so all the elements are displayed correctly on popular screen sizes. This project is able to switch sizes and proportions depending on which screen/device you are viewing it from.  I obtained all design specifications from a Figma site.  I created different branches in Github depending on what I was working on and merged them back into the master and gh-pages. I utilized both display: grid and dispay: flex properties depending on the need and screen size. I downloaded and imported the 'Inter' fonts family. We also enable the use of Buttons in JavaScript.
+
+**Technologies Used**
+
+* Visual Studio Code
+* Macbook Pro
 * Figma
-* Images
+* BEM Methodology
+* CSS
+* HTML
+* Grid display
+* @fonts
+* @media queries
+* Flex box and positioning
+* Inspect Tool Chrome
+* Github
+* JavaScript
 
-**Figma**
+**Github**
 
-* [Link to the project in Figma](https://www.figma.com/file/mUgu8OSHWE0M6p6vfwmdu9/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+Below is my link to the project on Github pages:
+https://reaolin.github.io/web_project_4/
