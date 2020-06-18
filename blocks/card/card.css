@@ -1,10 +1,12 @@
 @import url('./__info/card__info.css');
 @import url('./__title/card__title.css');
 @import url('./__heart/card__heart.css');
+@import url('./__img/card__img.css');
+@import url('./__remove-btn/card__remove-btn.css');
 
 .card{
     background-color: white;
     color: #000000;
     border-radius: 10px;
-
+    position: relative;
 }
