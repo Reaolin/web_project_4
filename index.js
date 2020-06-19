@@ -155,14 +155,17 @@ function toggleLike(e){
 const imgModal = document.querySelector('.modal_type_display-image');
 const imgCaption = document.querySelector('.modal__caption');
 const imgPopup = document.querySelector('.modal__img');
+const imgClsBtn = imgModal.querySelector('.modal__close');
 
 //creates image pop-up function
 function imageDisplay(data){
     imgPopup.src = data.link
     imgCaption.textContent = data.name
 }
-
-
+//creates clickable close button for image
+imgClsBtn.addEventListener('click', () => {
+    toggleModal(imgModal);
+})
 /*<div class="modal modal_type_display-image">
             <div class="modal__container">
             <button class="modal__close link"></button>

@@ -13,4 +13,7 @@
     left: 0;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
+    transition: visibility 1s, opacity 0.6s;
+
 }
