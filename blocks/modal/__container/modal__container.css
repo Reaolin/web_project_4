@@ -8,3 +8,11 @@
     width: 430px;
     height: 330px;
 }
+
+.modal_type_display-image .modal__container{
+    position: relative;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+
+}
