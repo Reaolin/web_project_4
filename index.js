@@ -26,6 +26,8 @@ editProfileClsBtn.addEventListener('click', () => {
 
 addCardButton.addEventListener('click', () => {
     toggleModal(addCardModal);
+    inputTitle.value = 'title';
+    inputUrl.value = 'url link';
 }); /* what it will do when we select the variable(read above) */
 addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
@@ -65,6 +67,7 @@ formCard.addEventListener('submit', (e) => {
         photoGrid.prepend(createCard({name:inputTitle.value, link: inputUrl.value}));
         }
     toggleModal(addCardModal);
+
     return newCard();
 });
 

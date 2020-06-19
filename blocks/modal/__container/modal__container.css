@@ -5,8 +5,8 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    width: 430px;
-    height: 330px;
+    max-width: 430px;
+    max-height: 330px;
 }
 
 .modal_type_display-image .modal__container{
@@ -14,5 +14,6 @@
     background: none;
     box-shadow: none;
     border-radius: 0;
-
+    max-width: 75vw;
+    max-height: 75vh;
 }
