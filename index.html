@@ -34,7 +34,7 @@
             <div class="modal__container">
                 <div class="modal__content">
                 <h3 class="modal__title">Edit profile</h3>
-                <form action="#" class="form">
+                <form action="#" class="form form_type_edit-profile">
                     <input type="text" name="name" class="form__name-input" value="name">
                     <input type="text" name="occupation" class="form__job-input" value="occupation">
                     
@@ -47,10 +47,11 @@
             </div>
         </div>
         <div class="modal modal_type_add-card">
+
             <div class="modal__container">
                 <div class="modal__content">
                 <h3 class="modal__title">New Card</h3>
-                <form action="#" class="form">
+                <form action="#" class="form form_type_add-card">
                     <input type="text" name="title" class="form__title-input" value="title">
                     <input type="url" name="url link" class="form__url-input" value="url link">
                     
@@ -58,6 +59,15 @@
                 </form>
                 <button class="modal__close link"></button>
             </div>
+            </div>
+        </div>
+        <div class="modal modal_type_display-image">
+            <div class="modal__container">
+            <button class="modal__close link"></button>
+            <figure>
+                <img src="" alt="" class="modal__img">
+                <figcaption class="modal__caption"></figcaption>
+            </figure>
             </div>
         </div>
         <template class="card-template">

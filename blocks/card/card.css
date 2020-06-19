@@ -3,6 +3,7 @@
 @import url('./__heart/card__heart.css');
 @import url('./__img/card__img.css');
 @import url('./__remove-btn/card__remove-btn.css');
+@import url('./__like/card__like.css');
 
 .card{
     background-color: white;

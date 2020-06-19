@@ -7,3 +7,9 @@
     border: none;
     padding: 0;
 }
+
+.card__heart:hover{
+        opacity: .6;
+        cursor: url('../../../images/mouse.svg'), auto;
+    
+}

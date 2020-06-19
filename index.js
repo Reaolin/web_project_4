@@ -39,10 +39,10 @@ const inputName = document.querySelector('.form__name-input'); /* creates a cons
 const inputOccup = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
 const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
 const profileOccup = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
-const form = document.querySelector('.form'); //creates the constant variable form for selecting the form class (which contains all the form info)
+const formProfile = document.querySelector('.form_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
 
-    //will create a function on what to do when we click on submit
-form.addEventListener('submit', (e) => {
+    //will create a function on what to do when we click on submit for the profile
+    formProfile.addEventListener('submit', (e) => {
     e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
     
     
@@ -50,14 +50,24 @@ form.addEventListener('submit', (e) => {
     //into the text that you enter within the class(read input field) that the constant variable profileName points to 
     profileOccup.textContent = inputOccup.value; //changes the text that is located in between the HTML tags with the class name that the inputOccu constant variable points to
     //into the text that you enter within the class(read input field) that the constant variable profileOccup points to 
-    toggleModal();
+    toggleModal(editProfileModal);
 });
 
+//card variables
+const formCard = document.querySelector('.form_type_add-card');
+const inputTitle = document.querySelector('.form__title-input'); /* creates a constant variable for the .form__title-input class */
+const inputUrl = document.querySelector('.form__url-input');
 
-
-addCardButton.addEventListener('click', () => {
-
+//adding a new card
+formCard.addEventListener('submit', (e) => {
+    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
+    const newCard = () => {
+        photoGrid.prepend(createCard({name:inputTitle.value, link: inputUrl.value}));
+        }
+    toggleModal(addCardModal);
+    return newCard();
 });
+
 
 //initial cards autocreated each time the page refreshes
 const initialCards = [
@@ -102,15 +112,19 @@ const createCard = (data) =>{
     cardTitle.textContent = data.name; //places the name, from the data, as the text content of the Card Title class and 
     cardImg.src = data.link; //places the data from link as the src or source for the image
 
-    cardHeartButton.addEventListener('click',() =>{
+    cardHeartButton.addEventListener('click',(e) =>{
+        toggleLike(e);
         //change heart
     })
+   
     cardRemoveButton.addEventListener('click',(e) =>{
         //remove card
         e.target.closest('.card').remove();
     })
       
     cardImg.addEventListener('click',() =>{
+       imageDisplay();
+        toggleModal(imgModal);
         //openModal()
     })
 
@@ -131,3 +145,30 @@ initialCards.forEach((data) => {
 
 });
 
+
+//create function to toggle like button (heart)
+function toggleLike(e){
+    e.target.classList.toggle('card__like');
+  }
+
+//image display variables
+const imgModal = document.querySelector('.modal_type_display-image');
+const imgCaption = document.querySelector('.modal__caption');
+const imgPopup = document.querySelector('.modal__img');
+
+//creates image pop-up function
+function imageDisplay(data){
+    imgPopup.src = data.link
+    imgCaption.textContent = data.name
+}
+
+
+/*<div class="modal modal_type_display-image">
+            <div class="modal__container">
+            <button class="modal__close link"></button>
+            <figure>
+                <img src="" alt="" class="modal__pic">
+                <figcaption class=""></figcaption>
+            </figure>
+            </div>
+        </div>*/
