@@ -123,7 +123,7 @@ const createCard = (data) =>{
     })
       
     cardImg.addEventListener('click',() =>{
-       imageDisplay();
+       imageDisplay(data);
         toggleModal(imgModal);
         //openModal()
     })
