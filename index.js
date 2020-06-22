@@ -10,11 +10,26 @@ const addCardButton = document.querySelector(".profile__add-btn");/* creates the
 const editProfileClsBtn = editProfileModal.querySelector('.modal__close');/* creates the variable editProfileClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the edit profile modal*/
 const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the variable addCardClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the add card modal*/
 
+//Form Input Values
+
+const inputName = document.querySelector('.form__name-input'); /* creates a constant variable for the .form__name-input class */
+const inputOccuppation = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
+const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
+const profileOccuppation = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
+const formProfile = document.querySelector('.form_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
+
+//card variables
+const formCard = document.querySelector('.form_type_add-card');
+const inputTitle = document.querySelector('.form__title-input'); /* creates a constant variable for the .form__title-input class */
+const inputUrl = document.querySelector('.form__url-input');
+const photoGrid = document.querySelector('.photo-grid');
+
+
 function toggleModal (modal){
     modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
     /* .modal_display changes the display: none to display:flex */
     inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
-    inputOccup.value = profileOccup.textContent; 
+    inputOccuppation.value = profileOccuppation.textContent; 
 }
 
 editBtn.addEventListener('click', () => {
@@ -27,7 +42,7 @@ editProfileClsBtn.addEventListener('click', () => {
 addCardButton.addEventListener('click', () => {
     toggleModal(addCardModal);
     inputTitle.value = 'title';
-    inputUrl.value = 'url link';
+    inputUrl.value = 'url';
 }); /* what it will do when we select the variable(read above) */
 addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
@@ -36,40 +51,42 @@ addCardClsBtn.addEventListener('click', () => {
 
 //FORM DATA
 
-
-const inputName = document.querySelector('.form__name-input'); /* creates a constant variable for the .form__name-input class */
-const inputOccup = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
-const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
-const profileOccup = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
-const formProfile = document.querySelector('.form_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
-
     //will create a function on what to do when we click on submit for the profile
     formProfile.addEventListener('submit', (e) => {
-    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
+        e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
     
     
-    profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
+        profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
     //into the text that you enter within the class(read input field) that the constant variable profileName points to 
-    profileOccup.textContent = inputOccup.value; //changes the text that is located in between the HTML tags with the class name that the inputOccu constant variable points to
+        profileOccuppation.textContent = inputOccuppation.value; //changes the text that is located in between the HTML tags with the class name that the inputOccu constant variable points to
     //into the text that you enter within the class(read input field) that the constant variable profileOccup points to 
-    toggleModal(editProfileModal);
+        toggleModal(editProfileModal);
 });
 
-//card variables
-const formCard = document.querySelector('.form_type_add-card');
-const inputTitle = document.querySelector('.form__title-input'); /* creates a constant variable for the .form__title-input class */
-const inputUrl = document.querySelector('.form__url-input');
 
-//adding a new card
-formCard.addEventListener('submit', (e) => {
-    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
-    const newCard = () => {
-        photoGrid.prepend(createCard({name:inputTitle.value, link: inputUrl.value}));
-        }
-    toggleModal(addCardModal);
 
-    return newCard();
-});
+//create function to toggle like button (heart)
+function toggleLike(e){
+    e.target.classList.toggle('card__like');
+  }
+
+//image display variables
+const imgModal = document.querySelector('.modal_type_display-image');
+const imgCaption = document.querySelector('.modal__caption');
+const imgPopup = document.querySelector('.modal__img');
+const imgClsBtn = imgModal.querySelector('.modal__close');
+
+//creates image pop-up function
+function imageDisplay(data){
+    imgPopup.src = data.link
+    imgPopup.alt = data.name
+    imgCaption.textContent = data.name
+    
+}
+//creates clickable close button for image
+imgClsBtn.addEventListener('click', () => {
+    toggleModal(imgModal);
+})
 
 
 //initial cards autocreated each time the page refreshes
@@ -112,9 +129,10 @@ const createCard = (data) =>{
     const cardRemoveButton = cardElement.querySelector('.card__remove-btn'); 
     //calls all elements of div or the card class
 
+    
     cardTitle.textContent = data.name; //places the name, from the data, as the text content of the Card Title class and 
     cardImg.src = data.link; //places the data from link as the src or source for the image
-
+    cardImg.alt = data.name; //places the name as Alt for accesibility
     cardHeartButton.addEventListener('click',(e) =>{
         toggleLike(e);
         //change heart
@@ -135,7 +153,16 @@ const createCard = (data) =>{
     
 }
 
-const photoGrid = document.querySelector('.photo-grid');
+//adding a new card
+formCard.addEventListener('submit', (e) => {
+    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
+    const newCard = () => {
+        photoGrid.prepend(createCard({name:inputTitle.value, link: inputUrl.value}));
+        }
+    toggleModal(addCardModal);
+
+    return newCard();
+});
 
 
 const renderCard = (data) => {
@@ -149,32 +176,4 @@ initialCards.forEach((data) => {
 });
 
 
-//create function to toggle like button (heart)
-function toggleLike(e){
-    e.target.classList.toggle('card__like');
-  }
 
-//image display variables
-const imgModal = document.querySelector('.modal_type_display-image');
-const imgCaption = document.querySelector('.modal__caption');
-const imgPopup = document.querySelector('.modal__img');
-const imgClsBtn = imgModal.querySelector('.modal__close');
-
-//creates image pop-up function
-function imageDisplay(data){
-    imgPopup.src = data.link
-    imgCaption.textContent = data.name
-}
-//creates clickable close button for image
-imgClsBtn.addEventListener('click', () => {
-    toggleModal(imgModal);
-})
-/*<div class="modal modal_type_display-image">
-            <div class="modal__container">
-            <button class="modal__close link"></button>
-            <figure>
-                <img src="" alt="" class="modal__pic">
-                <figcaption class=""></figcaption>
-            </figure>
-            </div>
-        </div>*/
