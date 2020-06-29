@@ -183,7 +183,7 @@ initialCards.forEach((data) => {
 //escape and click functions
 
 function closeModal(evt) {
-    if(evt.target == modalDisplay){
+    if(evt.target === evt.target.closest('.modal_display')){
     toggleModal(evt.target.closest('.modal'));}
   }
 
