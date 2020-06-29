@@ -35,12 +35,15 @@
                 <div class="modal__content">
                 <h3 class="modal__title">Edit profile</h3>
                 <form action="#" class="modal__form form form_type_edit-profile">
+                    <label class="modal__label">
                     <input id="profile-name" type="text" name="name" class="modal__input form__name-input" value="name" minlength="2" maxlength="40" required>
                     <span id="profile-name-error" class="modal__error"></span>
-
+                    </label>
+                    
+                    <label class="modal__label">
                     <input id="profile-occupation" type="text" name="occupation" class="modal__input form__job-input" value="occupation" minlength="2" maxlength="200" required>
                     <span id="profile-occupation-error" class="modal__error"></span>
-
+                    </label>
                     <button type="submit" class="modal__button form__save">Save</button> 
                     <!-- Buttons have to be within the class you are calling for JavaScript
                     otherwise it won't talk-->
@@ -55,11 +58,16 @@
                 <div class="modal__content">
                 <h3 class="modal__title">New Card</h3>
                 <form action="#" class="modal__form form form_type_add-card">
+
+                    <label class="modal__label">
                     <input id="image-title" type="text" name="title" class="modal__input form__title-input" value="title" minlength="1" maxlength="30" required>
                     <span id="image-title-error" class="modal__error"></span>
+                    </label>
 
+                    <label class="modal__label">
                     <input id="image-url" type="url" name="url" class="modal__input form__url-input" value="url" required>
                     <span id="image-url-error" class="modal__error"></span>
+                    </label>
 
                     <button type="submit" class="modal__button form__save">Save</button>
                 </form>

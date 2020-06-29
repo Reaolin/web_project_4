@@ -20,6 +20,9 @@
     line-height: 15px;
     color: #FF0000;
     visibility: hidden;
+    position: absolute;
+    top: 25px;
+    left: 0;
 }
 
 .modal__error_visible{

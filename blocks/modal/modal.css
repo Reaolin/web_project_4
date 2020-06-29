@@ -3,6 +3,8 @@
 @import url('./__content/modal__content.css');
 @import url('./__title/modal__title.css');
 @import url('./__img/modal__img.css');
+@import url('./__label/modal__label.css');
+
 
 .modal{
     display: flex;
