@@ -1,5 +1,6 @@
 
 //wrappers
+const modalWindow = document.querySelector('.modal');
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
 const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
 
@@ -30,6 +31,7 @@ function toggleModal (modal){
     /* .modal_display changes the display: none to display:flex */
     inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
     inputOccuppation.value = profileOccuppation.textContent; 
+    
 }
 
 editBtn.addEventListener('click', () => {
@@ -176,4 +178,33 @@ initialCards.forEach((data) => {
 });
 
 
+
+//escape and click functions
+
+function closeModal(evt) {
+    toggleModal(evt.target.closest('.modal'));
+    evt.target.removeEventListener("click", closeModal);
+  }
+
+  function escape(e) {
+    if (e.key === 'Escape') {
+      toggleModal(document.querySelector('.modal_display'));
+    }
+    e.target.removeEventListener('keyup', escape);
+  }
+  window.addEventListener('keyup', escape);
+
+  
+
+const closeWindows = () => {
+    const popUps = Array.from(document.querySelectorAll('.modal'));
+  
+
+    popUps.forEach((popup) => {
+        popup.addEventListener("click", closeModal)}     
+  
+    )};
+  
+  closeWindows();
+  
 

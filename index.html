@@ -34,11 +34,14 @@
             <div class="modal__container">
                 <div class="modal__content">
                 <h3 class="modal__title">Edit profile</h3>
-                <form action="#" class="form form_type_edit-profile">
-                    <input type="text" name="name" class="form__name-input" value="name">
-                    <input type="text" name="occupation" class="form__job-input" value="occupation">
-                    
-                    <button type="submit" class="form__save">Save</button> 
+                <form action="#" class="modal__form form form_type_edit-profile">
+                    <input id="profile-name" type="text" name="name" class="modal__input form__name-input" value="name" minlength="2" maxlength="40" required>
+                    <span id="profile-name-error" class="modal__error"></span>
+
+                    <input id="profile-occupation" type="text" name="occupation" class="modal__input form__job-input" value="occupation" minlength="2" maxlength="200" required>
+                    <span id="profile-occupation-error" class="modal__error"></span>
+
+                    <button type="submit" class="modal__button form__save">Save</button> 
                     <!-- Buttons have to be within the class you are calling for JavaScript
                     otherwise it won't talk-->
                 </form>
@@ -51,11 +54,14 @@
             <div class="modal__container">
                 <div class="modal__content">
                 <h3 class="modal__title">New Card</h3>
-                <form action="#" class="form form_type_add-card">
-                    <input type="text" name="title" class="form__title-input" value="title">
-                    <input type="url" name="url" class="form__url-input" value="url">
-                    
-                    <button type="submit" class="form__save">Save</button>
+                <form action="#" class="modal__form form form_type_add-card">
+                    <input id="image-title" type="text" name="title" class="modal__input form__title-input" value="title" minlength="1" maxlength="30" required>
+                    <span id="image-title-error" class="modal__error"></span>
+
+                    <input id="image-url" type="url" name="url" class="modal__input form__url-input" value="url" required>
+                    <span id="image-url-error" class="modal__error"></span>
+
+                    <button type="submit" class="modal__button form__save">Save</button>
                 </form>
                 <button class="modal__close link"></button>
             </div>
@@ -83,6 +89,7 @@
                 </div>
             </li>
         </template>
+        <script src="./validation.js"></script>
         <script src="./index.js"></script>
         
 </body>
