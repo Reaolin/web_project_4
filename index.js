@@ -4,7 +4,7 @@ const modalWindow = document.querySelector('.modal');
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
 const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
 const modalContainer = document.querySelector('.modal__container');
-const modalClose = document.querySelector('.modal__close')
+
 //buttons & DOMS
 const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
 const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
@@ -182,7 +182,7 @@ initialCards.forEach((data) => {
 //escape and click functions
 
 function closeModal(evt) {
-    if(evt.target !== modalContainer || modalClose){
+    if(evt.target !== modalContainer){
     toggleModal(evt.target.closest('.modal'));}
   }
 

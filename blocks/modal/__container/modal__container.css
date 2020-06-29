@@ -7,6 +7,7 @@
     flex-direction: column;
     max-width: 430px;
     max-height: 330px;
+    z-index: 2;
 }
 
 .modal_type_display-image .modal__container{
@@ -16,4 +17,5 @@
     border-radius: 0;
     max-width: 75vw;
     max-height: 75vh;
+    z-index: 2;
 }
