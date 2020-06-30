@@ -29,8 +29,7 @@ function escape(e) {
     if (e.key === 'Escape') {
       toggleModal(document.querySelector('.modal_display'));
     }
-    window.removeEventListener('keydown', escape);
-  }
+}
 
 function toggleModal (modal){
     modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
@@ -39,9 +38,9 @@ function toggleModal (modal){
     inputOccuppation.value = profileOccuppation.textContent; 
     
     if (modal.classList.contains('modal_display')) {
-        window.addEventListener('keydown', escape);
+        window.addEventListener('keyup', escape);
       } else{
-        window.removeEventListener('keydown', escape);
+        window.removeEventListener('keyup', escape);
       }
     
 }
