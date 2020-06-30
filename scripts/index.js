@@ -25,6 +25,12 @@ const inputUrl = document.querySelector('.form__url-input');
 const photoGrid = document.querySelector('.photo-grid');
 
 
+function escape(e) {
+    if (e.key === 'Escape') {
+      toggleModal(document.querySelector('.modal_display'));
+    }
+    window.removeEventListener('keydown', escape);
+  }
 
 function toggleModal (modal){
     modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
@@ -32,12 +38,6 @@ function toggleModal (modal){
     inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
     inputOccuppation.value = profileOccuppation.textContent; 
     
-    function escape(e) {
-    if (e.key === 'Escape') {
-      toggleModal(document.querySelector('.modal_display'));
-    }
-    window.removeEventListener('keydown', escape);
-  }
     if (modal.classList.contains('modal_display')) {
         window.addEventListener('keydown', escape);
       } else{
@@ -199,9 +199,6 @@ function closeModal(evt) {
 
 
  
-
-  
-
 const closeWindows = () => {
     const popUps = Array.from(document.querySelectorAll('.modal'));
 
