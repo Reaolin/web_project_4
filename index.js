@@ -32,6 +32,11 @@ function toggleModal (modal){
     /* .modal_display changes the display: none to display:flex */
     inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
     inputOccuppation.value = profileOccuppation.textContent; 
+    if (modal.classList.contains('modal_display')) {
+        window.addEventListener('keydown', escape);
+      } else{
+        window.removeEventListener('keydown', escape);
+      }
     
 }
 
@@ -44,8 +49,8 @@ editProfileClsBtn.addEventListener('click', () => {
 
 addCardButton.addEventListener('click', () => {
     toggleModal(addCardModal);
-    inputTitle.value = 'title';
-    inputUrl.value = 'url';
+    inputTitle.value = '';
+    inputUrl.value = '';
 }); /* what it will do when we select the variable(read above) */
 addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
@@ -84,7 +89,7 @@ function imageDisplay(data){
     imgPopup.src = data.link
     imgPopup.alt = data.name
     imgCaption.textContent = data.name
-    
+       
 }
 //creates clickable close button for image
 imgClsBtn.addEventListener('click', () => {
@@ -163,7 +168,6 @@ formCard.addEventListener('submit', (e) => {
         photoGrid.prepend(createCard({name:inputTitle.value, link: inputUrl.value}));
         }
     toggleModal(addCardModal);
-
     return newCard();
 });
 
@@ -191,9 +195,9 @@ function closeModal(evt) {
     if (e.key === 'Escape') {
       toggleModal(document.querySelector('.modal_display'));
     }
-    e.target.removeEventListener('keyup', escape);
+    window.removeEventListener('keyup', escape);
   }
-  window.addEventListener('keyup', escape);
+ 
 
   
 
