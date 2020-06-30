@@ -1,9 +1,7 @@
 
 //wrappers
-const modalWindow = document.querySelector('.modal');
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
 const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
-const modalContainer = document.querySelector('.modal__container');
 const modalDisplay = document.querySelector('.modal_display');
 
 //buttons & DOMS
@@ -27,11 +25,19 @@ const inputUrl = document.querySelector('.form__url-input');
 const photoGrid = document.querySelector('.photo-grid');
 
 
+
 function toggleModal (modal){
     modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
     /* .modal_display changes the display: none to display:flex */
     inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
     inputOccuppation.value = profileOccuppation.textContent; 
+    
+    function escape(e) {
+    if (e.key === 'Escape') {
+      toggleModal(document.querySelector('.modal_display'));
+    }
+    window.removeEventListener('keydown', escape);
+  }
     if (modal.classList.contains('modal_display')) {
         window.addEventListener('keydown', escape);
       } else{
@@ -191,19 +197,14 @@ function closeModal(evt) {
     toggleModal(evt.target.closest('.modal'));}
   }
 
-  function escape(e) {
-    if (e.key === 'Escape') {
-      toggleModal(document.querySelector('.modal_display'));
-    }
-    window.removeEventListener('keyup', escape);
-  }
+
  
 
   
 
 const closeWindows = () => {
     const popUps = Array.from(document.querySelectorAll('.modal'));
-    
+
     popUps.forEach((popup) => {
         popup.addEventListener("click", closeModal)}
          
