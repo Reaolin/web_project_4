@@ -203,9 +203,7 @@ function closeModal(evt) {
 
 const closeWindows = () => {
     const popUps = Array.from(document.querySelectorAll('.modal'));
-  
-console.log(popUps);
-
+    
     popUps.forEach((popup) => {
         popup.addEventListener("click", closeModal)}
          
