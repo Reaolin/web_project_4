@@ -8,7 +8,7 @@ function showErrorMessage(input, form, {errorClass, inputErrorClass, ...rest}){
 }
 
 function hideErrorMessage(input, form, {errorClass, inputErrorClass, ...rest}){
-    const error =document.querySelector('#' + input.id + '-error');
+    const error = document.querySelector('#' + input.id + '-error');
     error.textContent = input.validationMessage;
 
     error.classList.remove(errorClass);
