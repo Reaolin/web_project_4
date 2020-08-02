@@ -1,8 +1,26 @@
+import FormValidator from './FormValidator.js';
+
+const dataConfig = {
+    inputSelector: ".modal__input",
+    submitButtonSelector: ".modal__button",
+    inactiveButtonClass: "modal__button_disabled",
+    inputErrorClass: "modal__input_type_error",
+    errorClass: "modal__error_visible"
+  };
 
 //wrappers
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
 const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
-const modalDisplay = document.querySelector('.modal_display');
+
+const editProfileForm = editProfileModal.querySelector('.modal__form')
+const addCardForm = addCardModal.querySelector('.modal__form')
+  
+const editProfileValidator = new FormValidator(dataConfig, editProfileForm);
+const addCardValidator = new FormValidator(dataConfig, addCardForm);
+
+addCardValidator.enableValidation();
+editProfileValidator.enableValidation();
+
 
 //buttons & DOMS
 const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
