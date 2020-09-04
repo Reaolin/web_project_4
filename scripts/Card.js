@@ -1,7 +1,6 @@
 const imgModal = document.querySelector('.modal_type_display-image');
 const imgCaption = document.querySelector('.modal__caption');
 const imgPopup = document.querySelector('.modal__img');
-const imgClsBtn = imgModal.querySelector('.modal__close');
 
 function escape(e) {
     if (e.key === 'Escape') {
@@ -10,9 +9,7 @@ function escape(e) {
 }
 function toggleModal (modal){
     modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
-    /* .modal_display changes the display: none to display:flex */
-    inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
-    inputOccuppation.value = profileOccuppation.textContent; 
+    /* .modal_display changes the display: none to display:flex */ 
     
     if (modal.classList.contains('modal_display')) {
         window.addEventListener('keyup', escape);
@@ -21,14 +18,7 @@ function toggleModal (modal){
       }
     
 }
-//create function to toggle like button (heart)
-function toggleLike(e){
-    e.target.classList.toggle('card__like');
-  }
 
-imgClsBtn.addEventListener('click', () => {
-    toggleModal(imgModal);
-})
 
 
 class Card {
@@ -66,7 +56,7 @@ _addEventListener(){
     })
 
     cardImg.addEventListener('click',() =>{
-        imageDisplay(data);
+        this._handleImageDisplay();
          toggleModal(imgModal);
          //openModal()
      })
@@ -74,7 +64,10 @@ _addEventListener(){
 };
 
 _handleHeartButton(e){
-    toggleLike(e);
+    function toggleLike(e){
+        e.target.classList.toggle('card__like');
+      }
+      toggleLike(e);
 }
 
 _handleCardRemove(e){
