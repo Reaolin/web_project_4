@@ -142,8 +142,8 @@ const initialCards = [
 formCard.addEventListener('submit', (e) => {
     e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
     const newCard = () => {
-        const card = new Card()
-        photoGrid.prepend(card.renderCard({name: inputTitle.value, link: inputUrl.value}));
+        const card = new Card({name: inputTitle.value, link: inputUrl.value},cardTemplateSelector)
+        photoGrid.prepend(card.createCard());
         }
     toggleModal(addCardModal);
     return newCard();
