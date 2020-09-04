@@ -1,4 +1,6 @@
 import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
 
 const dataConfig = {
     inputSelector: ".modal__input",
@@ -96,24 +98,11 @@ addCardClsBtn.addEventListener('click', () => {
 
 
 
-//create function to toggle like button (heart)
-function toggleLike(e){
-    e.target.classList.toggle('card__like');
-  }
 
 //image display variables
 const imgModal = document.querySelector('.modal_type_display-image');
-const imgCaption = document.querySelector('.modal__caption');
-const imgPopup = document.querySelector('.modal__img');
 const imgClsBtn = imgModal.querySelector('.modal__close');
 
-//creates image pop-up function
-function imageDisplay(data){
-    imgPopup.src = data.link
-    imgPopup.alt = data.name
-    imgCaption.textContent = data.name
-       
-}
 //creates clickable close button for image
 imgClsBtn.addEventListener('click', () => {
     toggleModal(imgModal);
@@ -148,41 +137,6 @@ const initialCards = [
     }
 ];
 
-const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
-
-const createCard = (data) =>{
-    
-    const cardElement = cardTemplate.cloneNode(true); //clones all children(img,button,title, etc) under the parent (.card)
-
-    const cardImg = cardElement.querySelector('.card__img');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const cardHeartButton = cardElement.querySelector('.card__heart'); 
-    const cardRemoveButton = cardElement.querySelector('.card__remove-btn'); 
-    //calls all elements of div or the card class
-
-    
-    cardTitle.textContent = data.name; //places the name, from the data, as the text content of the Card Title class and 
-    cardImg.src = data.link; //places the data from link as the src or source for the image
-    cardImg.alt = data.name; //places the name as Alt for accesibility
-    cardHeartButton.addEventListener('click',(e) =>{
-        toggleLike(e);
-        //change heart
-    })
-   
-    cardRemoveButton.addEventListener('click',(e) =>{
-        //remove card
-        e.target.closest('.card').remove();
-    })
-      
-    cardImg.addEventListener('click',() =>{
-       imageDisplay(data);
-        toggleModal(imgModal);
-        //openModal()
-    })
-
-    return cardElement;
-    
-}
 
 //adding a new card
 formCard.addEventListener('submit', (e) => {
@@ -194,9 +148,11 @@ formCard.addEventListener('submit', (e) => {
     return newCard();
 });
 
+const cardTemplateSelector = ('.card-template');
 
 const renderCard = (data) => {
-    photoGrid.append(createCard(data));
+    const card = new Card(data,cardTemplateSelector )
+    photoGrid.append(card.createCard());
 
 }
 

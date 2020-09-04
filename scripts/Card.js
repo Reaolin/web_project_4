@@ -21,6 +21,10 @@ function toggleModal (modal){
       }
     
 }
+//create function to toggle like button (heart)
+function toggleLike(e){
+    e.target.classList.toggle('card__like');
+  }
 
 imgClsBtn.addEventListener('click', () => {
     toggleModal(imgModal);
@@ -100,3 +104,5 @@ return this._card;
     
         }
     }
+
+export default Card;
