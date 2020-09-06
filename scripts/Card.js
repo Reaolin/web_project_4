@@ -70,8 +70,8 @@ _handleHeartButton(e){
       toggleLike(e);
 }
 
-_handleCardRemove(e){
-    e.target.closest('.card').remove();
+_handleCardRemove(){
+    this._card.closest('.card').remove();
 }
 
 _handleImageDisplay(){
