@@ -84,12 +84,12 @@ _handleImageDisplay(){
 createCard(){
     
     const cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
-   
+    const cardImageSelector = this._card.querySelector('.card__img');
     this._card = cardElement;
 
     this._card.querySelector('.card__title').textContent = this._name; //places the name, from the data, as the text content of the Card Title class and 
-    this._card.querySelector('.card__img').src = this._link; //places the data from link as the src or source for the image
-    this._card.querySelector('.card__img').alt = this._name; //places the name as Alt for accesibility
+    cardImageSelector.src = this._link; //places the data from link as the src or source for the image
+    cardImageSelector.alt = this._name; //places the name as Alt for accesibility
     
 this._addEventListener();
  
