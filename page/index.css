@@ -13,36 +13,15 @@
 @import url('./../blocks/profile/profile.css');
 @import url('./../blocks/modal/_display/modal_display.css');
 @import url('./../blocks/modal/_type/modal_type_display-image.css');
+@import url('./../blocks/modal/__error/modal__error.css');
+@import url('./../blocks/modal/__input/modal__input_type_error.css');
+@import url('./../blocks/modal/__button/modal__button_disabled.css');
 
 
-.modal__error{
-    font-size: 12px;
-    line-height: 15px;
-    color: #FF0000;
-    visibility: hidden;
-    position: absolute;
-    top: 25px;
-    left: 0;
-}
 
-.modal__error_visible{
-    visibility: visible;
-}
 
-.modal__input_type_error{
-    border-bottom: 1px solid #FF0000;
-}
 
-.modal__button_disabled{
-    opacity: 0.2;
-    color: #000000;
-    border: 1px solid #000000;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    box-sizing: border-box;
-    border-radius: 2px;
-    pointer-events: none;
-}
+
+
 
 
