@@ -1,23 +1,8 @@
+import toggleModal from './index.js';
+
 const imgModal = document.querySelector('.modal_type_display-image');
 const imgCaption = document.querySelector('.modal__caption');
 const imgPopup = document.querySelector('.modal__img');
-
-function escape(e) {
-    if (e.key === 'Escape') {
-      toggleModal(document.querySelector('.modal_display'));
-    }
-}
-function toggleModal (modal){
-    modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
-    /* .modal_display changes the display: none to display:flex */ 
-    
-    if (modal.classList.contains('modal_display')) {
-        window.addEventListener('keyup', escape);
-      } else{
-        window.removeEventListener('keyup', escape);
-      }
-    
-}
 
 
 

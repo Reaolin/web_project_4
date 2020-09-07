@@ -184,3 +184,4 @@ const closeWindows = () => {
   closeWindows();
   
 
+export default toggleModal;
