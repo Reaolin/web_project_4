@@ -1,3 +1,4 @@
+import  toggleModal from './utils.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 
@@ -9,6 +10,7 @@ const dataConfig = {
     inputErrorClass: "modal__input_type_error",
     errorClass: "modal__error_visible"
   };
+
 
 //wrappers
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
@@ -45,25 +47,6 @@ const inputUrl = document.querySelector('.form__url-input');
 const photoGrid = document.querySelector('.photo-grid');
 
 
-function escape(e) {
-    if (e.key === 'Escape') {
-      toggleModal(document.querySelector('.modal_display'));
-    }
-}
-
-function toggleModal (modal){
-    modal.classList.toggle('modal_display'); /* creates the function that will toggle the .modal_display class on or off*/
-    /* .modal_display changes the display: none to display:flex */
-    inputName.value = profileName.textContent; //points back to text already containted in the HTML tags to fill the values 
-    inputOccuppation.value = profileOccuppation.textContent; 
-    
-    if (modal.classList.contains('modal_display')) {
-        window.addEventListener('keyup', escape);
-      } else{
-        window.removeEventListener('keyup', escape);
-      }
-    
-}
 
 editBtn.addEventListener('click', () => {
     toggleModal(editProfileModal);

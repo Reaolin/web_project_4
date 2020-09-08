@@ -1,4 +1,4 @@
-import toggleModal from './index.js';
+import toggleModal from './utils.js';
 
 const imgModal = document.querySelector('.modal_type_display-image');
 const imgCaption = document.querySelector('.modal__caption');
@@ -56,7 +56,7 @@ _handleHeartButton(e){
 }
 
 _handleCardRemove(){
-    this._card.closest('.card').remove();
+    this._card.remove('.card');
 }
 
 _handleImageDisplay(){
