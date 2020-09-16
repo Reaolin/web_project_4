@@ -1,3 +1,7 @@
+// index.js
+
+import "./styles/index.css"; // add import of the main stylesheets file
+
 const Hello = "hello yoohoo!";
 console.log(Hello);
 

@@ -23,6 +23,20 @@ module.exports = {
         exclude: "/node_modules/"
       },
       {
+        test: /\.css$/,
+        // add postcss-loader
+        loader: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            // add an options object
+            options: { importLoaders: 1 }
+          },
+          "postcss-loader"
+        ],
+      },   
+
+      {
         // this regular expression will search for files with the following extensions
         test: /\.(png|svg|jpg|gif|woff2)$/,
         // file-loader should be used when processing those files
@@ -33,16 +47,11 @@ module.exports = {
         test: /\.html$/,
         loader: "html-loader",
       },
-      {
-        // use these rules only for CSS files
-          test: /\.css$/,
-        // use MiniCssExtractPlugin.loader and css-loader
-        // when processing these files
-          loader:  [MiniCssExtractPlugin.loader, "css-loader"]
-      },
     ]
   },
-  plugins: [new HtmlWebpackPlugin({
+      
+  plugins: [
+    new HtmlWebpackPlugin({
     template: "./src/index.html" // path to our index.html file
   }),
   new MiniCssExtractPlugin()
