@@ -1,7 +1,9 @@
 import  toggleModal from './utils.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import Popup from './Popup.js';
+//import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import Section from './Section.js';
 
 
 const dataConfig = {
@@ -20,6 +22,7 @@ const addCardModal = document.querySelector('.modal_type_add-card');/* variable 
 const editProfileForm = editProfileModal.querySelector('.modal__form')
 const addCardForm = addCardModal.querySelector('.modal__form')
   
+//validation
 const editProfileValidator = new FormValidator(dataConfig, editProfileForm);
 const addCardValidator = new FormValidator(dataConfig, addCardForm);
 
@@ -121,19 +124,24 @@ const initialCards = [
     }
 ];
 
-
-//adding a new card
-formCard.addEventListener('submit', (e) => {
-    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
-    const newCard = () => {
-        const card = new Card({name: inputTitle.value, link: inputUrl.value},cardTemplateSelector)
-        photoGrid.prepend(card.createCard());
-        }
-    toggleModal(addCardModal);
-    return newCard();
-});
-
 const cardTemplateSelector = ('.card-template');
+
+const cardGrid = new Section({
+    data: initialCards,
+    renderer: (data)=>{
+        const newCards = new Card(
+            data,
+            cardTemplateSelector)
+
+        cardGrid.addItem(newCards.createCard());
+    }
+},photoGrid
+);
+cardGrid.renderItems();
+
+
+
+
 
 const renderCard = (data) => {
     const card = new Card(data,cardTemplateSelector )
@@ -148,6 +156,11 @@ initialCards.forEach((data) => {
 
 
 
+
+
+
+
+/*
 //escape and click functions
 
 function closeModal(evt) {
@@ -167,5 +180,26 @@ const closeWindows = () => {
   
   closeWindows();
   
-
+*/
 export default toggleModal;
+
+//Expand Image
+
+/*const editProfile = new PopupWithForm('.modal_type_edit-profile');
+editProfile.setEventListeners();
+const addCard = new PopupWithForm('.modal_type_add-card');
+addCard.setEventListeners();
+*/
+const enlargeImage = new PopupWithImage('.modal_type_display-image');
+enlargeImage.setEventListeners();
+
+//adding a new card
+formCard.addEventListener('submit', (e) => {
+    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
+    const newCard = () => {
+        const card = new Card({name: inputTitle.value, link: inputUrl.value},cardTemplateSelector)
+        photoGrid.prepend(card.createCard());
+        }
+    toggleModal(addCardModal);
+    return newCard();
+});

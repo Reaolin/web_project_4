@@ -1,8 +1,7 @@
 import toggleModal from './utils.js';
 
 const imgModal = document.querySelector('.modal_type_display-image');
-const imgCaption = document.querySelector('.modal__caption');
-const imgPopup = document.querySelector('.modal__img');
+
 
 
 
@@ -57,13 +56,6 @@ _handleHeartButton(e){
 
 _handleCardRemove(){
     this._card.remove('.card');
-}
-
-_handleImageDisplay(){
-    imgPopup.src = this._link
-    imgPopup.alt = this._name
-    imgCaption.textContent = this._name
-       
 }
 
 createCard(){

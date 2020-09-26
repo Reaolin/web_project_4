@@ -26,10 +26,16 @@ class Popup{
         };
 
         setEventListeners(){
-            this._popupElement.querySelector('.modal__close').addEventListener('click', (e)=>{
+            this._popupElement
+            .querySelector('.modal__close').addEventListener('click', ()=>{
                 this._close();
             });
-
+            
+        this._popupElement.addEventListener('click', (e) => {
+         if(!e.target.closest('.modal__container')) {
+            this.close();
+      }; 
+    });
         };
     }
 
