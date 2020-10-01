@@ -1,6 +1,8 @@
+
+
 class Popup{
     constructor(popupSelector){
-        this._popupElement = document.querySelector(popupSelector);
+        this._popupElement = popupSelector;
         this._handleEscClose = this._handleEscClose.bind(this);
     }
 
@@ -27,8 +29,10 @@ class Popup{
 
         setEventListeners(){
             this._popupElement
-            .querySelector('.modal__close').addEventListener('click', ()=>{
-                this._close();
+            .addEventListener('click', ()=>{
+                this.close();
+
+
             });
             
         this._popupElement.addEventListener('click', (e) => {

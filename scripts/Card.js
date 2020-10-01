@@ -11,6 +11,7 @@ class Card {
         this._link = data.link;
 
         this._cardTemplateSelector = cardTemplateSelector;
+        //this._handleCardClick = handleCardClick;
 
 }
 _getCardTemplate(){
@@ -39,12 +40,12 @@ _addEventListener(){
         this._handleCardRemove(e);
     })
 
-    cardImg.addEventListener('click',() =>{
+   /* cardImg.addEventListener('click',() =>{
         this._handleImageDisplay();
          toggleModal(imgModal);
          //openModal()
      })
-
+*/
 };
 
 _handleHeartButton(e){
@@ -57,6 +58,7 @@ _handleHeartButton(e){
 _handleCardRemove(){
     this._card.remove('.card');
 }
+
 
 createCard(){
     
