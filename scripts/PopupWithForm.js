@@ -14,12 +14,6 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
         }
 
         _getInputValues(){
-            this._inputs = this._popupElement.querySelectorAll('.modal__input');
-
-        
-            profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
-            //into the text that you enter within the class(read input field) that the constant variable profileName points to 
-            profileOccuppation.textContent = inputOccuppation.value;
 
         };
 
@@ -28,15 +22,16 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
             addEventListener
             ('submit', (e)=> {
                 e.preventDefault();
+                profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
+            //into the text that you enter within the class(read input field) that the constant variable profileName points to 
+            profileOccuppation.textContent = inputOccuppation.value;
 
             });
             super.setEventListeners();
         };
         close(){
-            inputName.value = profileName.textContent; //points back to text already contained in the HTML tags to fill the values 
-            inputOccuppation.value = profileOccuppation.textContent; 
-
-super.close();
+           
+        super.close();
         };
 
     }

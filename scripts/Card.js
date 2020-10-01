@@ -1,17 +1,14 @@
-import toggleModal from './utils.js';
-
 const imgModal = document.querySelector('.modal_type_display-image');
 
 
 
 
 class Card {
-    constructor (data, cardTemplateSelector){
+    constructor ({data, handleCardClick}, cardTemplateSelector){
         this._name = data.name;
         this._link = data.link;
-
+        this._handleCardClick = handleCardClick;
         this._cardTemplateSelector = cardTemplateSelector;
-        //this._handleCardClick = handleCardClick;
 
 }
 _getCardTemplate(){
@@ -40,12 +37,11 @@ _addEventListener(){
         this._handleCardRemove(e);
     })
 
-   /* cardImg.addEventListener('click',() =>{
-        this._handleImageDisplay();
-         toggleModal(imgModal);
-         //openModal()
+   cardImg.addEventListener('click',() =>{
+        this._handleCardClick();
+
      })
-*/
+
 };
 
 _handleHeartButton(e){

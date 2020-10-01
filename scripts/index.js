@@ -30,6 +30,16 @@ addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
 
+//Form Popup
+const formProfile = document.querySelector('.modal_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
+const formPopup = new PopupWithForm(formProfile);
+    formPopup.setEventListeners()
+
+//CardPopup
+const formAddCard = document.querySelector('.modal_type_add-card'); //creates the constant variable form for selecting the form class (which contains all the form info)
+    const cardPopup = new PopupWithForm(formAddCard);
+    cardPopup.setEventListeners()
+
 //buttons & DOMS
 const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
 const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
@@ -61,21 +71,7 @@ addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
 }); /* what it will do when we select the variable(read above)*/
 
-/*
-//FORM DATA
 
-    //will create a function on what to do when we click on submit for the profile
-    formProfile.addEventListener('submit', (e) => {
-        e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
-    
-    
-        profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
-    //into the text that you enter within the class(read input field) that the constant variable profileName points to 
-        profileOccuppation.textContent = inputOccuppation.value; //changes the text that is located in between the HTML tags with the class name that the inputOccu constant variable points to
-    //into the text that you enter within the class(read input field) that the constant variable profileOccup points to 
-        toggleModal(editProfileModal);
-});
-*/
 
 
 
@@ -117,13 +113,19 @@ const initialCards = [
     }
 ];
 
+const enlargeImage = new PopupWithImage(imgModal);
+enlargeImage.setEventListeners();
+
 const cardTemplateSelector = ('.card-template');
 
 const cardGrid = new Section({
     data: initialCards,
     renderer: (data)=>{
-        const newCards = new Card(
+        const newCards = new Card({
             data,
+            handleCardClick: ()=>{
+                enlargeImage.open();}
+            },
             cardTemplateSelector)
 
         cardGrid.addItem(newCards.createCard());
@@ -133,14 +135,6 @@ const cardGrid = new Section({
 cardGrid.renderItems();
 
 
-//Form Popup
-const formProfile = document.querySelector('.modal_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
-const formPopup = new PopupWithForm(formProfile);
-    formPopup.setEventListeners()
-
-    const formAddCard = document.querySelector('.modal_type_add-card'); //creates the constant variable form for selecting the form class (which contains all the form info)
-    const cardPopup = new PopupWithForm(formAddCard);
-    cardPopup.setEventListeners()
 
 /*
 const renderCard = (data) => {
@@ -160,27 +154,7 @@ initialCards.forEach((data) => {
 
 
 
-/*
-//escape and click functions
 
-function closeModal(evt) {
-    if(evt.target === evt.target.closest('.modal_display')){
-    toggleModal(evt.target.closest('.modal'));}
-  }
-
-
- 
-const closeWindows = () => {
-    const popUps = Array.from(document.querySelectorAll('.modal'));
-
-    popUps.forEach((popup) => {
-        popup.addEventListener("click", closeModal)}
-         
-    )};
-  
-  closeWindows();
-  
-*/
 export default toggleModal;
 
 //Expand Image
@@ -191,17 +165,6 @@ const addCard = new PopupWithForm('.modal_type_add-card');
 addCard.setEventListeners();
 */
 
-/*const enlargeImage = new PopupWithImage('.card__img');
-enlargeImage.setEventListeners();*/
 
-//adding a new card
-/*formCard.addEventListener('submit', (e) => {
-    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
-    const newCard = () => {
-        const card = new Card({name: inputTitle.value, link: inputUrl.value},cardTemplateSelector)
-        photoGrid.prepend(card.createCard());
-        }
-    toggleModal(addCardModal);
-    return newCard();
-});
-*/
+
+

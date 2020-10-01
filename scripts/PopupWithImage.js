@@ -7,11 +7,11 @@ class PopupWithImage extends Popup{
     }
 
     open(link, caption){
-        const viewImage = this._popupElement.querySelector(link);
-        const viewCaption = this._popupElement.querySelector(caption);
+        const viewImage = this._popupElement.querySelector('.modal__img');
+        const viewCaption = this._popupElement.querySelector('.modal__caption');
        
         viewImage.src = link;
-        viewImage.alt = caption;
+        viewImage.alt = link;
         viewCaption.textContent = caption;
 
         super.open();
@@ -20,5 +20,3 @@ class PopupWithImage extends Popup{
 
 export default PopupWithImage;
 
-const imgCaption = document.querySelector('.modal__caption');
-const imgPopup = document.querySelector('.modal__img');
