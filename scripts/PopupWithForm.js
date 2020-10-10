@@ -12,11 +12,12 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
         constructor(handleSubmitForm, popupSelector){
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
+        
 
         }
 
         _getInputValues(){
-        this._inputList = this._formElement.querySelectorAll('.modal__input');
+        this._inputList = this._popupElement.querySelectorAll('.modal__input');
         this._inputValues = {};
         this._inputList.forEach(input => this._inputValues[input.name] = input.value);
         return this._inputValues;
