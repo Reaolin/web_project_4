@@ -9,27 +9,30 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
 
 
     class PopupWithForm extends Popup{
-        constructor(popupSelector){
+        constructor(handleSubmitForm, popupSelector){
         super(popupSelector);
+        this._handleSubmitForm = handleSubmitForm;
+
         }
 
         _getInputValues(){
+        this._inputList = this._formElement.querySelectorAll('.modal__input');
+        this._inputValues = {};
+        this._inputList.forEach(input => this._inputValues[input.name] = input.value);
+        return this._inputValues;
 
         };
 
         setEventListeners(){
-            this._popupElement
-            addEventListener
-            ('submit', (e)=> {
+            this._popupElement.addEventListener('submit', (e)=> {
                 e.preventDefault();
-                profileName.textContent = inputName.value; //changes the text that is located in between the HTML tags with the class name that the inputName constant variable points to
-            //into the text that you enter within the class(read input field) that the constant variable profileName points to 
-            profileOccuppation.textContent = inputOccuppation.value;
+                this._handleSubmitForm(this._getInputValues());
 
             });
             super.setEventListeners();
         };
         close(){
+            this._popupElement.reset();
            
         super.close();
         };

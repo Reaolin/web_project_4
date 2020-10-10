@@ -4,7 +4,7 @@ import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
 import Section from './Section.js';
 import PopupWithForm from './PopupWithForm.js';
-
+import UserInfo from './UserInfo.js';
 
 const dataConfig = {
     inputSelector: ".modal__input",
@@ -16,32 +16,12 @@ const dataConfig = {
 
 //Testing edits......
 
-//wrappers
-const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
-const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
-
-const editProfileForm = editProfileModal.querySelector('.modal__form')
-const addCardForm = addCardModal.querySelector('.modal__form')
-//buttons & DOMS
-const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
-const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
-const editProfileClsBtn = editProfileModal.querySelector('.modal__close');/* creates the variable editProfileClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the edit profile modal*/
-const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the variable addCardClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the add card modal*/
-
 //Form Input Values
 
 const inputName = document.querySelector('.form__name-input'); /* creates a constant variable for the .form__name-input class */
 const inputOccuppation = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
 const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
 const profileOccuppation = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
-const formProfile = document.querySelector('.form_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
-
-//card variables
-const formCard = document.querySelector('.form_type_add-card');
-const inputTitle = document.querySelector('.form__title-input'); /* creates a constant variable for the .form__title-input class */
-const inputUrl = document.querySelector('.form__url-input');
-const photoGrid = document.querySelector('.photo-grid');
-
 
 
 //wrappers
@@ -58,22 +38,26 @@ const addCardValidator = new FormValidator(dataConfig, addCardForm);
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
-
-//Form Popup
-const formProfile = document.querySelector('.modal_type_edit-profile'); //creates the constant variable form for selecting the form class (which contains all the form info)
-const formPopup = new PopupWithForm(formProfile);
-    formPopup.setEventListeners()
-
-//CardPopup
-const formAddCard = document.querySelector('.modal_type_add-card'); //creates the constant variable form for selecting the form class (which contains all the form info)
-    const cardPopup = new PopupWithForm(formAddCard);
-    cardPopup.setEventListeners()
-
 //buttons & DOMS
 const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
 const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
 const editProfileClsBtn = editProfileModal.querySelector('.modal__close');/* creates the variable editProfileClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the edit profile modal*/
 const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the variable addCardClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the add card modal*/
+
+
+//userInfo
+const userInfo = new UserInfo('.form__name-input', '.form__job-input');
+//Form Popup
+const formPopup = new PopupWithForm({
+    popupSelector: editProfileModal, handleSubmitForm: () => {
+        userInfo.setUserInfo({ name: formName.value, job: formJob.value });
+    }
+
+});
+    formPopup.setEventListeners()
+
+
+
 
 
 //card variables
@@ -142,10 +126,12 @@ const initialCards = [
     }
 ];
 
-const enlargeImage = new PopupWithImage(imgModal);
-enlargeImage.setEventListeners();
+
 
 const cardTemplateSelector = ('.card-template');
+
+const enlargeImage = new PopupWithImage(imgModal);
+enlargeImage.setEventListeners();
 
 const cardGrid = new Section({
     data: initialCards,
@@ -163,6 +149,8 @@ const cardGrid = new Section({
 );
 cardGrid.renderItems();
 
+
+
 //adding a new card
 formCard.addEventListener('submit', (e) => {
     e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
@@ -172,7 +160,14 @@ formCard.addEventListener('submit', (e) => {
         }
     toggleModal(addCardModal);
     return newCard();
+
 });
+
+//CardPopup
+const formAddCard = document.querySelector('.modal_type_add-card'); //creates the constant variable form for selecting the form class (which contains all the form info)
+    const cardPopup = new PopupWithForm(formAddCard);
+    cardPopup.setEventListeners()
+
 
 /*
 const renderCard = (data) => {
