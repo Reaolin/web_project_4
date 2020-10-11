@@ -49,7 +49,7 @@ const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the
 const userInfo = new UserInfo('.form__name-input', '.form__job-input');
 //Form Popup
 const formPopup = new PopupWithForm({
-    popupSelector: editProfileModal, handleSubmitForm: () => {
+    popupSelector: editBtn, handleSubmitForm: () => {
         userInfo.setUserInfo({ name: formName.value, job: formJob.value });
     }
 

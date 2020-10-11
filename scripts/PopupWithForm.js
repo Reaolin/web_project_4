@@ -9,7 +9,7 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
 
 
     class PopupWithForm extends Popup{
-        constructor(handleSubmitForm, popupSelector){
+        constructor({handleSubmitForm, popupSelector}){
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
         
