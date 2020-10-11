@@ -9,7 +9,7 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
 
 
     class PopupWithForm extends Popup{
-        constructor({handleSubmitForm, popupSelector}){
+        constructor({popupSelector, handleSubmitForm}){
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
         
@@ -33,7 +33,7 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
             super.setEventListeners();
         };
         close(){
-            this._popupElement.reset();
+            //this._popupElement.reset();
            
         super.close();
         };

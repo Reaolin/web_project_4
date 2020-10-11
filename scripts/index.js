@@ -16,13 +16,6 @@ const dataConfig = {
 
 //Testing edits......
 
-//Form Input Values
-
-const inputName = document.querySelector('.form__name-input'); /* creates a constant variable for the .form__name-input class */
-const inputOccuppation = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
-const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
-const profileOccuppation = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
-
 
 //wrappers
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
@@ -46,10 +39,10 @@ const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the
 
 
 //userInfo
-const userInfo = new UserInfo('.form__name-input', '.form__job-input');
+const userInfo = new UserInfo('form__name-input', 'form__job-input');
 //Form Popup
 const formPopup = new PopupWithForm({
-    popupSelector: editBtn, handleSubmitForm: () => {
+    popupSelector: editProfileModal, handleSubmitForm: () => {
         userInfo.setUserInfo({ name: formName.value, job: formJob.value });
     }
 
@@ -71,15 +64,15 @@ const photoGrid = document.querySelector('.photo-grid');
 editBtn.addEventListener('click', () => {
     toggleModal(editProfileModal);
 }); /* what it will do when we click on the editBtn (adds the modal_display class to editProfileModal or toggles the modal_display) */
+
 editProfileClsBtn.addEventListener('click', () => {
     toggleModal(editProfileModal);
 }); /* what it will do when we select the variable(read above) editProfileClsBtn */
 
 addCardButton.addEventListener('click', () => {
     toggleModal(addCardModal);
-    inputTitle.value = '';
-    inputUrl.value = '';
 }); /* what it will do when we select the variable(read above) */
+
 addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
 }); /* what it will do when we select the variable(read above)*/
@@ -152,20 +145,37 @@ cardGrid.renderItems();
 
 
 //adding a new card
+/*
 formCard.addEventListener('submit', (e) => {
     e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
     const newCard = () => {
-        const card = new Card({name: inputTitle.value, link: inputUrl.value},cardTemplateSelector)
+        const card = new Card({
+            data: {name: inputTitle.value, link: inputUrl.value}, 
+            handleCardClick: (data) => {
+                imagePopup.open({ data });
+            }
+        },cardTemplateSelector)
         photoGrid.prepend(card.createCard());
         }
     toggleModal(addCardModal);
     return newCard();
 
 });
+*/
 
 //CardPopup
-const formAddCard = document.querySelector('.modal_type_add-card'); //creates the constant variable form for selecting the form class (which contains all the form info)
-    const cardPopup = new PopupWithForm(formAddCard);
+    const cardPopup = new PopupWithForm({
+        popupSelector: addCardModal, handleSubmitForm: () => {
+            const card = new Card({
+                data: {name: inputTitle.value, link: inputUrl.value}, 
+                handleCardClick: (data) => {
+                    enlargeImage.open({ data });
+                }
+            },cardTemplateSelector)
+            photoGrid.prepend(card.createCard());
+            }
+    
+    });
     cardPopup.setEventListeners()
 
 
