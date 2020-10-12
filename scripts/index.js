@@ -47,7 +47,7 @@ const formPopup = new PopupWithForm({
     }
 
 });
-    formPopup.setEventListeners()
+formPopup.setEventListeners();
 
 
 
@@ -62,17 +62,16 @@ const photoGrid = document.querySelector('.photo-grid');
 
 
 editBtn.addEventListener('click', () => {
-    toggleModal(editProfileModal);
+    formPopup.open();
+    userInfo.getUserInfo();
 }); /* what it will do when we click on the editBtn (adds the modal_display class to editProfileModal or toggles the modal_display) */
-
+/*
 editProfileClsBtn.addEventListener('click', () => {
     toggleModal(editProfileModal);
 }); /* what it will do when we select the variable(read above) editProfileClsBtn */
 
-addCardButton.addEventListener('click', () => {
-    toggleModal(addCardModal);
-}); /* what it will do when we select the variable(read above) */
 
+/*
 addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
 }); /* what it will do when we select the variable(read above)*/
@@ -81,14 +80,7 @@ addCardClsBtn.addEventListener('click', () => {
 
 
 
-//image display variables
-const imgModal = document.querySelector('.modal_type_display-image');
-const imgClsBtn = imgModal.querySelector('.modal__close');
 
-//creates clickable close button for image
-imgClsBtn.addEventListener('click', () => {
-    toggleModal(imgModal);
-})
 
 
 //initial cards autocreated each time the page refreshes
@@ -119,12 +111,20 @@ const initialCards = [
     }
 ];
 
+//image display variables
+const imgModal = document.querySelector('.modal_type_display-image');
+const imgClsBtn = imgModal.querySelector('.modal__close');
 
+//creates clickable close button for image
+imgClsBtn.addEventListener('click', () => {
+    toggleModal(imgModal);
+})
 
 const cardTemplateSelector = ('.card-template');
 
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
+
 
 const cardGrid = new Section({
     data: initialCards,
@@ -176,9 +176,11 @@ formCard.addEventListener('submit', (e) => {
             }
     
     });
-    cardPopup.setEventListeners()
+    cardPopup.setEventListeners();
 
-
+    addCardButton.addEventListener('click', () => {
+        cardPopup.open();
+    }); /* what it will do when we select the variable(read above) */
 /*
 const renderCard = (data) => {
     const card = new Card(data,cardTemplateSelector )
@@ -192,21 +194,7 @@ initialCards.forEach((data) => {
 });
 */
 
-
-
-
-
-
-
 export default toggleModal;
-
-//Expand Image
-
-/*const editProfile = new PopupWithForm('.modal_type_edit-profile');
-editProfile.setEventListeners();
-const addCard = new PopupWithForm('.modal_type_add-card');
-addCard.setEventListeners();
-*/
 
 
 

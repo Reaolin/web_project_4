@@ -1,17 +1,12 @@
     import Popup from './Popup.js';
 
-    //Form Input Values
-
-const inputName = document.querySelector('.form__name-input'); /* creates a constant variable for the .form__name-input class */
-const inputOccuppation = document.querySelector('.form__job-input');/* creates a constant variable for the .form__job-input class */
-const profileName = document.querySelector('.profile-info__title');/* creates a constant variable for the .profile-info__title class */
-const profileOccuppation = document.querySelector('.profile-info__sub-title');/* creates a constant variable for the .profile-info__sub-title class */
-
+    const formContainer = document.querySelector('.modal__form');
 
     class PopupWithForm extends Popup{
         constructor({popupSelector, handleSubmitForm}){
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
+        this._container = formContainer;
         
 
         }
@@ -25,15 +20,18 @@ const profileOccuppation = document.querySelector('.profile-info__sub-title');/*
         };
 
         setEventListeners(){
+
             this._popupElement.addEventListener('submit', (e)=> {
                 e.preventDefault();
                 this._handleSubmitForm(this._getInputValues());
+                this.close();
 
             });
             super.setEventListeners();
+
         };
         close(){
-            //this._popupElement.reset();
+            this._container.reset();
            
         super.close();
         };

@@ -47,5 +47,28 @@ const closeWindows = () => {
     return newCard();
 });
 */
+//buttons & DOMS
+const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
+const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
+const editProfileClsBtn = editProfileModal.querySelector('.modal__close');/* creates the variable editProfileClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the edit profile modal*/
+const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the variable addCardClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the add card modal*/
+
+
+editBtn.addEventListener('click', () => {
+    toggleModal(editProfileModal);
+}); /* what it will do when we click on the editBtn (adds the modal_display class to editProfileModal or toggles the modal_display) */
+
+editProfileClsBtn.addEventListener('click', () => {
+    toggleModal(editProfileModal);
+}); /* what it will do when we select the variable(read above) editProfileClsBtn */
+
+addCardButton.addEventListener('click', () => {
+    toggleModal(addCardModal);
+}); /* what it will do when we select the variable(read above) */
+
+addCardClsBtn.addEventListener('click', () => {
+    toggleModal(addCardModal);
+}); /* what it will do when we select the variable(read above)*/
+
 
 

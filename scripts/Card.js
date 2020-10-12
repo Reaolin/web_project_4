@@ -40,7 +40,7 @@ _addEventListener(){
     })
 
     cardImg.addEventListener('click',() =>{
-        this._handleImageDisplay();
+        this._handleCardClick();
          //toggleModal(imgModal);
          //openModal()
      })
@@ -58,7 +58,10 @@ _handleCardRemove(){
     this._card.remove('.card');
 }
 
-_handleImageDisplay(){
+_handleCardClick(){
+this._card.classList.add('modal_type_display-image');
+
+
     imgPopup.src = this._link
     imgPopup.alt = this._name
     imgCaption.textContent = this._name
