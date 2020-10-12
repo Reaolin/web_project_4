@@ -46,4 +46,3 @@ class Popup{
 
 export default Popup;
 
-// new Popup('.modal__form') ---example
