@@ -1,10 +1,12 @@
     import Popup from './Popup.js';
 
-    const formContainer = document.querySelector('.modal__form');
+   
 
     class PopupWithForm extends Popup{
         constructor({popupSelector, handleSubmitForm}){
         super(popupSelector);
+
+        const formContainer = this._popupElement.querySelector('.modal__form');
         this._handleSubmitForm = handleSubmitForm;
         this._container = formContainer;
         
@@ -21,7 +23,7 @@
 
         setEventListeners(){
             //will create a function on what to do when we click on submit for the profile
-            this._popupElement.addEventListener('submit', (e)=> {
+            this._container.addEventListener('submit', (e)=> {
                 e.preventDefault();
                 this._handleSubmitForm(this._getInputValues());
                 this.close();
