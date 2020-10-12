@@ -21,8 +21,8 @@ class UserInfo{
     }
     
     setUserInfo(){
-        this._profileName = this._formName.textContent; 
-        this._profileJob = this._formJob.textContent;
+        this._profileName.textContent = this._formName.value; 
+        this._profileJob.textContent  = this._formJob.value;
 
     }
 }
