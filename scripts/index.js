@@ -1,4 +1,4 @@
-import  toggleModal from './utils.js';
+
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
@@ -131,9 +131,6 @@ cardGrid.renderItems();
     addCardButton.addEventListener('click', () => {
         cardPopup.open();
     }); /* what it will do when we select the variable(read above) */
-
-
-export default toggleModal;
 
 
 
