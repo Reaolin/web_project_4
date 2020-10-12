@@ -70,5 +70,53 @@ addCardClsBtn.addEventListener('click', () => {
     toggleModal(addCardModal);
 }); /* what it will do when we select the variable(read above)*/
 
+//adding a new card
+/*
+formCard.addEventListener('submit', (e) => {
+    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
+    const newCard = () => {
+        const card = new Card({
+            data: {name: inputTitle.value, link: inputUrl.value}, 
+            handleCardClick: (data) => {
+                imagePopup.open({ data });
+            }
+        },cardTemplateSelector)
+        photoGrid.prepend(card.createCard());
+        }
+    toggleModal(addCardModal);
+    return newCard();
 
+});
+*/
+
+/*
+const renderCard = (data) => {
+    const card = new Card(data,cardTemplateSelector )
+    photoGrid.append(card.createCard());
+
+}
+
+initialCards.forEach((data) => {
+    renderCard(data);
+
+});
+*/
+
+//creates clickable close button for image
+const imgClsBtn = imgModal.querySelector('.modal__close');
+
+imgClsBtn.addEventListener('click', () => {
+    toggleModal(imgModal);
+})
+
+/*
+editProfileClsBtn.addEventListener('click', () => {
+    toggleModal(editProfileModal);
+}); /* what it will do when we select the variable(read above) editProfileClsBtn */
+
+
+/*
+addCardClsBtn.addEventListener('click', () => {
+    toggleModal(addCardModal);
+}); /* what it will do when we select the variable(read above)*/
 

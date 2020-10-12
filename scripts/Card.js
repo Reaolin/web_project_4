@@ -41,8 +41,6 @@ _addEventListener(){
 
     cardImg.addEventListener('click',() =>{
         this._handleCardClick();
-         //toggleModal(imgModal);
-         //openModal()
      })
 
 };

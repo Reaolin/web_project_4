@@ -20,7 +20,7 @@
         };
 
         setEventListeners(){
-
+            //will create a function on what to do when we click on submit for the profile
             this._popupElement.addEventListener('submit', (e)=> {
                 e.preventDefault();
                 this._handleSubmitForm(this._getInputValues());
@@ -39,6 +39,6 @@
     }
 
     export default PopupWithForm;
-    //will create a function on what to do when we click on submit for the profile
+ 
 
     

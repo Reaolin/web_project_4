@@ -14,9 +14,6 @@ const dataConfig = {
     errorClass: "modal__error_visible"
   };
 
-//Testing edits......
-
-
 //wrappers
 const editProfileModal = document.querySelector('.modal_type_edit-profile');/* variable for the whole .modal_type_edit-profile class*/
 const addCardModal = document.querySelector('.modal_type_add-card');/* variable for the whole .modal_type_add-card class*/
@@ -34,8 +31,6 @@ editProfileValidator.enableValidation();
 //buttons & DOMS
 const editBtn = document.querySelector('.profile__edit-btn');/* creates the variable editBtn that equals the class .profile__edit-btn(aka we want to select the pencil, which we've named .profile__edit-btn)*/
 const addCardButton = document.querySelector(".profile__add-btn");/* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
-const editProfileClsBtn = editProfileModal.querySelector('.modal__close');/* creates the variable editProfileClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the edit profile modal*/
-const addCardClsBtn = addCardModal.querySelector('.modal__close');/* creates the variable addCardClsBtn that equals the class .modal__close (aka 'X' image we've made, in order to click on the x) inside the add card modal*/
 
 
 //userInfo
@@ -54,7 +49,6 @@ formPopup.setEventListeners();
 
 
 //card variables
-const formCard = document.querySelector('.form_type_add-card');
 const inputTitle = document.querySelector('.form__title-input'); /* creates a constant variable for the .form__title-input class */
 const inputUrl = document.querySelector('.form__url-input');
 const photoGrid = document.querySelector('.photo-grid');
@@ -65,23 +59,6 @@ editBtn.addEventListener('click', () => {
     formPopup.open();
     userInfo.getUserInfo();
 }); /* what it will do when we click on the editBtn (adds the modal_display class to editProfileModal or toggles the modal_display) */
-/*
-editProfileClsBtn.addEventListener('click', () => {
-    toggleModal(editProfileModal);
-}); /* what it will do when we select the variable(read above) editProfileClsBtn */
-
-
-/*
-addCardClsBtn.addEventListener('click', () => {
-    toggleModal(addCardModal);
-}); /* what it will do when we select the variable(read above)*/
-
-
-
-
-
-
-
 
 //initial cards autocreated each time the page refreshes
 const initialCards = [
@@ -113,19 +90,12 @@ const initialCards = [
 
 //image display variables
 const imgModal = document.querySelector('.modal_type_display-image');
-const imgClsBtn = imgModal.querySelector('.modal__close');
-
-//creates clickable close button for image
-imgClsBtn.addEventListener('click', () => {
-    toggleModal(imgModal);
-})
-
 const cardTemplateSelector = ('.card-template');
 
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
 
-
+//Creates Initial Card set
 const cardGrid = new Section({
     data: initialCards,
     renderer: (data)=>{
@@ -143,33 +113,13 @@ const cardGrid = new Section({
 cardGrid.renderItems();
 
 
-
-//adding a new card
-/*
-formCard.addEventListener('submit', (e) => {
-    e.preventDefault(); //prevents the page from refreshing (more specifically, it prevents the default action of the event 'submit', one of which is refreshing the browser)
-    const newCard = () => {
-        const card = new Card({
-            data: {name: inputTitle.value, link: inputUrl.value}, 
-            handleCardClick: (data) => {
-                imagePopup.open({ data });
-            }
-        },cardTemplateSelector)
-        photoGrid.prepend(card.createCard());
-        }
-    toggleModal(addCardModal);
-    return newCard();
-
-});
-*/
-
 //CardPopup
     const cardPopup = new PopupWithForm({
-        popupSelector: addCardModal, handleSubmitForm: () => {
+        popupSelector: addCardModal, handleSubmitForm: (data) => {
             const card = new Card({
                 data: {name: inputTitle.value, link: inputUrl.value}, 
-                handleCardClick: (data) => {
-                    enlargeImage.open({ data });
+                handleCardClick: () => {
+                    enlargeImage.open({name: data.title, link: data.url});
                 }
             },cardTemplateSelector)
             photoGrid.prepend(card.createCard());
@@ -181,18 +131,7 @@ formCard.addEventListener('submit', (e) => {
     addCardButton.addEventListener('click', () => {
         cardPopup.open();
     }); /* what it will do when we select the variable(read above) */
-/*
-const renderCard = (data) => {
-    const card = new Card(data,cardTemplateSelector )
-    photoGrid.append(card.createCard());
 
-}
-
-initialCards.forEach((data) => {
-    renderCard(data);
-
-});
-*/
 
 export default toggleModal;
 
