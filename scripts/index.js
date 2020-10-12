@@ -132,7 +132,7 @@ const cardGrid = new Section({
         const newCards = new Card({
             data,
             handleCardClick: ()=>{
-                enlargeImage.open();}
+                enlargeImage.open(data);}
             },
             cardTemplateSelector)
 
