@@ -6,7 +6,7 @@
   "scripts": {
     "webpack": "webpack",
     "build": "npm run webpack -- --mode production",
-    "dev": "webpack serve --open --watch"
+    "dev": "webpack-dev-server --open --watch"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "postcss-loader": "^4.0.4",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
