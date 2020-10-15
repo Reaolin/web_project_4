@@ -64,7 +64,7 @@ editBtn.addEventListener('click', () => {
 const initialCards = [
     {
         name: "Yosemite Valley",
-        link: "./images/Yosemite.png"
+        link: "https://images.unsplash.com/photo-1496245454747-b17bebc37e41?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
     },
     {
         name: "A Tree Somewhere",
@@ -75,8 +75,8 @@ const initialCards = [
         link: "https://images.unsplash.com/photo-1592035187437-47c0fe77a452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1391&q=80"
     },
     {
-        name: "Latemar",
-        link: "./images/Latemar.png"
+        name: "Gatlinburg, TN",
+        link: "https://images.unsplash.com/photo-1574368725712-5b70cdeb5a76?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=848&q=80"
     },
     {
         name: "Chilhowee Mountain",
