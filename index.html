@@ -1,102 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Around The US</title>
-</head>
-<body class="page">
-        <header class="header"> 
-            <img src="./images/logo.svg" class="logo" alt="Around US Logo">
-        </header>
-        <main class="main">
-            <section class="profile">
-                <img class="profile__avatar" src="./images/jc.png" alt="profile image">
-                    <div class="profile-info">
-                        <div class="profile-info__text">
-                    <h1 class="profile-info__title">Jacques Cousteau</h1>
-                    <p class="profile-info__sub-title">Explorer</p>
-                </div>
-                    <button class="profile__edit-btn link"></button> 
-                </div>
-            
-            <button class="profile__add-btn link"></button>
-            </section>
-            <section class="photo-container">
-            <ul class="photo-grid">
-                
-            </ul>
-        </section>
-        </main>
-        <footer class="footer">&copy; 2020 Around the U.S.</footer>
-        <div class="modal modal_type_edit-profile">
-            <div class="modal__container">
-                <div class="modal__content">
-                <h3 class="modal__title">Edit profile</h3>
-                <form action="#" class="modal__form form form_type_edit-profile" novalidate>
-                    <label class="modal__label">
-                    <input id="profile-name" type="text" name="name" class="modal__input form__name-input" value="name" minlength="2" maxlength="40" required>
-                    <span id="profile-name-error" class="modal__error"></span>
-                    </label>
-                    
-                    <label class="modal__label">
-                    <input id="profile-occupation" type="text" name="occupation" class="modal__input form__job-input" value="occupation" minlength="2" maxlength="200" required>
-                    <span id="profile-occupation-error" class="modal__error"></span>
-                    </label>
-                    <button type="submit" class="modal__button form__save">Save</button> 
-                    <!-- Buttons have to be within the class you are calling for JavaScript
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Around The US</title>
+	</head>
+	<body class="page">
+		<header class="header">
+			<img src="./images/logo.svg" class="logo" alt="Around US Logo" />
+		</header>
+		<main class="main">
+			<section class="profile">
+				<img
+					class="profile__avatar"
+					src="./images/jc.png"
+					alt="profile image"
+				/>
+				<div class="profile-info">
+					<div class="profile-info__text">
+						<h1 class="profile-info__title">Jacques Cousteau</h1>
+						<p class="profile-info__sub-title">Explorer</p>
+					</div>
+					<button class="profile__edit-btn link"></button>
+				</div>
+
+				<button class="profile__add-btn link"></button>
+			</section>
+			<section class="photo-container">
+				<ul class="photo-grid"></ul>
+			</section>
+		</main>
+		<footer class="footer">&copy; 2020 Around the U.S.</footer>
+		<div class="modal modal_type_edit-profile">
+			<div class="modal__container">
+				<div class="modal__content">
+					<h3 class="modal__title">Edit profile</h3>
+					<form
+						action="#"
+						class="modal__form form form_type_edit-profile"
+						novalidate
+					>
+						<label class="modal__label">
+							<input
+								id="profile-name"
+								type="text"
+								name="name"
+								class="modal__input form__name-input"
+								value="name"
+								minlength="2"
+								maxlength="40"
+								required
+							/>
+							<span id="profile-name-error" class="modal__error"></span>
+						</label>
+
+						<label class="modal__label">
+							<input
+								id="profile-occupation"
+								type="text"
+								name="occupation"
+								class="modal__input form__job-input"
+								value="occupation"
+								minlength="2"
+								maxlength="200"
+								required
+							/>
+							<span id="profile-occupation-error" class="modal__error"></span>
+						</label>
+						<button type="submit" class="modal__button form__save">Save</button>
+						<!-- Buttons have to be within the class you are calling for JavaScript
                     otherwise it won't talk-->
-                </form>
-                <button class="modal__close link"></button>
-            </div>
-            </div>
-        </div>
-        <div class="modal modal_type_add-card">
+					</form>
+					<button class="modal__close link"></button>
+				</div>
+			</div>
+		</div>
+		<div class="modal modal_type_add-card">
+			<div class="modal__container">
+				<div class="modal__content">
+					<h3 class="modal__title">New Card</h3>
+					<form
+						action="#"
+						class="modal__form form form_type_add-card"
+						novalidate
+					>
+						<label class="modal__label">
+							<input
+								id="image-title"
+								type="text"
+								name="title"
+								class="modal__input form__title-input"
+								placeholder="title"
+								minlength="1"
+								maxlength="30"
+								required
+							/>
+							<span id="image-title-error" class="modal__error"></span>
+						</label>
 
-            <div class="modal__container">
-                <div class="modal__content">
-                <h3 class="modal__title">New Card</h3>
-                <form action="#" class="modal__form form form_type_add-card" novalidate>
+						<label class="modal__label">
+							<input
+								id="image-url"
+								type="url"
+								name="url"
+								class="modal__input form__url-input"
+								placeholder="url"
+								required
+							/>
+							<span id="image-url-error" class="modal__error"></span>
+						</label>
 
-                    <label class="modal__label">
-                    <input id="image-title" type="text" name="title" class="modal__input form__title-input" placeholder="title" minlength="1" maxlength="30" required>
-                    <span id="image-title-error" class="modal__error"></span>
-                    </label>
-
-                    <label class="modal__label">
-                    <input id="image-url" type="url" name="url" class="modal__input form__url-input" placeholder="url" required>
-                    <span id="image-url-error" class="modal__error"></span>
-                    </label>
-
-                    <button type="submit" class="modal__button form__save">Save</button>
-                </form>
-                <button class="modal__close link"></button>
-            </div>
-            </div>
-        </div>
-        <div class="modal modal_type_display-image">
-            <div class="modal__container">
-            <button class="modal__close link"></button>
-            <figure>
-                <img src="#" alt="#" class="modal__img">
-                <figcaption class="modal__caption"></figcaption>
-            </figure>
-            </div>
-        </div>
-        <template class="card-template">
-            <li class="card">
-                <img class="card__img">
-                <button class="card__remove-btn">
-                    <img src="./images/Trashcan_lid.svg" alt="Trashcan lid" class="card__trash-top">
-                    <img src="./images/trashcan_bottom.svg" alt="trashcan bottom" class="card__trash-bottom">
-                </button>
-                <div class="card__info">
-                    <h2 class="card__title"></h2>
-                   <button class="card__heart"></button>
-                </div>
-            </li>
-        </template>
-
-        
-</body>
+						<button type="submit" class="modal__button form__save">Save</button>
+					</form>
+					<button class="modal__close link"></button>
+				</div>
+			</div>
+		</div>
+		<div class="modal modal_type_display-image">
+			<div class="modal__container">
+				<button class="modal__close link"></button>
+				<figure>
+					<img src="#" alt="#" class="modal__img" />
+					<figcaption class="modal__caption"></figcaption>
+				</figure>
+			</div>
+		</div>
+		<template class="card-template">
+			<li class="card">
+				<img class="card__img" />
+				<button class="card__remove-btn">
+					<img
+						src="./images/Trashcan_lid.svg"
+						alt="Trashcan lid"
+						class="card__trash-top"
+					/>
+					<img
+						src="./images/trashcan_bottom.svg"
+						alt="trashcan bottom"
+						class="card__trash-bottom"
+					/>
+				</button>
+				<div class="card__info">
+					<h2 class="card__title"></h2>
+					<button class="card__heart"></button>
+				</div>
+			</li>
+		</template>
+	</body>
 </html>
