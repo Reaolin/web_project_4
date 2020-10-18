@@ -12,24 +12,22 @@ const profileJob = document.querySelector(
 	".profile-info__sub-title"
 ); /* creates a constant variable for the .profile-info__sub-title class */
 
+
+
+
 class UserInfo {
-	constructor(name, job) {
-		this._name = name.value;
-		this._job = job.value;
-		this._formName = formName;
-		this._formJob = formJob;
-		this._profileName = profileName;
-		this._profileJob = profileJob;
+	constructor(nameSelector, jobSelector) {
+	  this._name = document.querySelector(nameSelector);
+	  this._job = document.querySelector(jobSelector);
 	}
 	getUserInfo() {
-		this._formName.value = this._profileName.textContent;
-		this._formJob.value = this._profileJob.textContent;
+	  this._profileInfo =  { name: this._name.textContent, job: this._job.textContent };
+	  return this._profileInfo;
 	}
-
-	setUserInfo() {
-		this._profileName.textContent = this._formName.value;
-		this._profileJob.textContent = this._formJob.value;
+   
+	setUserInfo({ userName, userJob }) {
+	  this._name.textContent = userName;
+	  this._job.textContent = userJob;
 	}
-}
-
-export default UserInfo;
+  }
+  export default UserInfo;

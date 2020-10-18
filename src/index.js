@@ -41,7 +41,7 @@ const addCardButton = document.querySelector(
 ); /* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
 
 //userInfo
-const userInfo = new UserInfo(".form__name-input", ".form__job-input");
+const userInfo = new UserInfo(".profile-info__title", ".profile-info__sub-title");
 //Form Popup
 const formPopup = new PopupWithForm({
 	popupSelector: editProfileModal,
@@ -51,17 +51,16 @@ const formPopup = new PopupWithForm({
 });
 formPopup.setEventListeners();
 
+editBtn.addEventListener("click", () => {
+	formPopup.open();
+	userInfo.getUserInfo();
+});
 //card variables
 const inputTitle = document.querySelector(
 	".form__title-input"
 ); /* creates a constant variable for the .form__title-input class */
 const inputUrl = document.querySelector(".form__url-input");
 const photoGrid = document.querySelector(".photo-grid");
-
-editBtn.addEventListener("click", () => {
-	formPopup.open();
-	userInfo.getUserInfo();
-}); /* what it will do when we click on the editBtn (adds the modal_display class to editProfileModal or toggles the modal_display) */
 
 //initial cards autocreated each time the page refreshes
 const initialCards = [
