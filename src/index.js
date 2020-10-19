@@ -138,7 +138,7 @@ const cardPopup = new PopupWithForm({
 			},
 			cardTemplateSelector
 		);
-		photoGrid.prepend(card.createCard());
+        cardGrid.addItem(card.createCard());
 	},
 });
 cardPopup.setEventListeners();

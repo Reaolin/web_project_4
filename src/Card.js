@@ -50,13 +50,7 @@ class Card {
 		this._card.remove(".card");
 	}
 
-	_handleCardClick() {
-		this._card.classList.add("modal_type_display-image");
 
-		imgPopup.src = this._link;
-		imgPopup.alt = this._name;
-		imgCaption.textContent = this._name;
-	}
 
 	createCard() {
 		const cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
