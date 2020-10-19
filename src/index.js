@@ -32,6 +32,7 @@ const addCardValidator = new FormValidator(dataConfig, addCardForm);
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
+
 //buttons & DOMS
 const editBtn = document.querySelector(
 	".profile__edit-btn"
@@ -144,5 +145,6 @@ const cardPopup = new PopupWithForm({
 cardPopup.setEventListeners();
 
 addCardButton.addEventListener("click", () => {
-	cardPopup.open();
+    cardPopup.open();
+
 }); /* what it will do when we select the variable(read above) */

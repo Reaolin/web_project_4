@@ -36,14 +36,13 @@ class FormValidator {
 	_toggleButtonState(inputs, button) {
 		const isValid = inputs.every((input) => input.validity.valid);
 
-		if (isValid) {
-			button.classList.remove(this._inactiveButtonClass);
-			button.disabled = false;
+		if (isValid) {this.makeButtonActive(button)
 		} else {
-			button.classList.add(this._inactiveButtonClass);
-			button.disabled = true;
-		}
-	}
+        this.makeButtonInactive(button)
+        }
+        
+    }
+   
 
 	_setEventListener() {
 		const inputs = Array.from(
@@ -57,7 +56,17 @@ class FormValidator {
 				this._toggleButtonState(inputs, button);
 			});
 		});
-	}
+    }
+    makeButtonActive(button){
+        button.classList.remove(this._inactiveButtonClass);
+		button.disabled = false;
+
+    }
+    makeButtonInactive(button){
+        button.classList.add(this._inactiveButtonClass);
+		button.disabled = true;
+
+    }
 
 	enableValidation() {
 		this._formElement.addEventListener("submit", (evt) => {
