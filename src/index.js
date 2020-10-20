@@ -33,6 +33,7 @@ addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
 
 
+
 //buttons & DOMS
 const editBtn = document.querySelector(
 	".profile__edit-btn"
@@ -41,20 +42,34 @@ const addCardButton = document.querySelector(
 	".profile__add-btn"
 ); /* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
 
+const profileName = document.querySelector(
+	".profile-info__title");
+const profileJob = document.querySelector(
+        ".profile-info__sub-title");
+        const formName = document.querySelector(
+            ".form__name-input"
+        ); /* creates a constant variable for the .form__name-input class */
+        const formJob = document.querySelector(
+            ".form__job-input"
+        ); /* creates a constant variable for the .form__job-input class */
+               
+
 //userInfo
-const userInfo = new UserInfo(".profile-info__title", ".profile-info__sub-title");
+const userInfo = new UserInfo(profileName, profileJob);
 //Form Popup
 const formPopup = new PopupWithForm({
 	popupSelector: editProfileModal,
 	handleSubmitForm: () => {
-		userInfo.setUserInfo();
+		userInfo.setUserInfo(profileName.textContent, profileJob.textContent);
 	},
 });
 formPopup.setEventListeners();
 
 editBtn.addEventListener("click", () => {
-	formPopup.open();
-	userInfo.getUserInfo();
+    const currentUserInfo = userInfo.getUserInfo();
+    formName.value = currentUserInfo.name;
+    formJob.value = currentUserInfo.job;
+    formPopup.open();
 });
 //card variables
 const inputTitle = document.querySelector(

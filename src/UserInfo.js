@@ -17,18 +17,26 @@ const profileJob = document.querySelector(
 
 class UserInfo {
 	constructor(nameSelector, jobSelector) {
-	  this._name = document.querySelector(nameSelector);
-	  this._job = document.querySelector(jobSelector);
-
+	  this._name = nameSelector;
+	  this._job = jobSelector;
 	}
+
 	getUserInfo() {
+		/*
 	  this._profileInfo =  { name: this._name.textContent, job: this._job.textContent };
 	  return this._profileInfo;
+	  */
+		return {
+			name: this._name.textContent,
+			job: this._job.textContent,
+		}
 	}
    
-	setUserInfo() {
-		this._name.textContent = formName.value;
-		this._job.textContent = formJob.value;
+	setUserInfo(name, job) {
+		this._name.textContent = name;
+		this._job.textContent = job;
 	}
+
+	// getter & setter in JS (get / set)
   }
   export default UserInfo;
