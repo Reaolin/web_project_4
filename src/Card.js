@@ -50,8 +50,6 @@ class Card {
 		this._card.remove(".card");
 	}
 
-
-
 	createCard() {
 		const cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
 		this._card = cardElement;

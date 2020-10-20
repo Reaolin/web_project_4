@@ -12,13 +12,10 @@ const profileJob = document.querySelector(
 	".profile-info__sub-title"
 ); /* creates a constant variable for the .profile-info__sub-title class */
 
-
-
-
 class UserInfo {
 	constructor(nameSelector, jobSelector) {
-	  this._name = nameSelector;
-	  this._job = jobSelector;
+		this._name = nameSelector;
+		this._job = jobSelector;
 	}
 
 	getUserInfo() {
@@ -29,14 +26,14 @@ class UserInfo {
 		return {
 			name: this._name.textContent,
 			job: this._job.textContent,
-		}
+		};
 	}
-   
+
 	setUserInfo(name, job) {
 		this._name.textContent = name;
 		this._job.textContent = job;
 	}
 
 	// getter & setter in JS (get / set)
-  }
-  export default UserInfo;
+}
+export default UserInfo;
