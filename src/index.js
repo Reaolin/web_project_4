@@ -150,10 +150,12 @@ const cardPopup = new PopupWithForm({
 			cardTemplateSelector
 		);
 		cardGrid.addItem(card.createCard());
+		addCardValidator.makeButtonInactive();
 	},
 });
 cardPopup.setEventListeners();
 
 addCardButton.addEventListener("click", () => {
+	addCardValidator.makeButtonInactive();
 	cardPopup.open();
-}); /* what it will do when we select the variable(read above) */
+});

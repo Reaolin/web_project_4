@@ -12,8 +12,6 @@ class Popup {
 	close() {
 		this._popupElement.classList.remove("modal_display");
 		document.removeEventListener("keyup", this._handleEscClose);
-		/*console.log(makeButtonInactive);
-		makeButtonInactive();*/
 	}
 
 	_handleEscClose(e) {

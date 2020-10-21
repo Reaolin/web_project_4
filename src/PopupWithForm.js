@@ -19,7 +19,6 @@ class PopupWithForm extends Popup {
 	}
 
 	setEventListeners() {
-		//will create a function on what to do when we click on submit for the profile
 		this._container.addEventListener("submit", (e) => {
 			e.preventDefault();
 			this._handleSubmitForm(this._getInputValues());
