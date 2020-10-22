@@ -9,7 +9,7 @@ class PopupWithImage extends Popup {
 	}
 
 	open({ name, link }) {
-		this._card.classList.add("modal_type_display-image");
+
 
 		this._viewImage.src = link;
 		this._viewImage.alt = name;
