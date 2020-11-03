@@ -50,8 +50,6 @@ const formJob = document.querySelector(
 	".form__job-input"
 ); /* creates a constant variable for the .form__job-input class */
 
-
-
 //userInfo
 const userInfo = new UserInfo(profileName, profileJob);
 //Form Popup
@@ -78,7 +76,6 @@ const photoGrid = document.querySelector(".photo-grid");
 
 //initial cards autocreated each time the page refreshes
 
-
 //image display variables
 const imgModal = document.querySelector(".modal_type_display-image");
 const cardTemplateSelector = ".card-template";
@@ -94,6 +91,7 @@ const api = new Api({
 	},
 });
 
+//get cards from API
 api.getInitialCards().then((res) => {
 	//Creates Initial Card set
 	const cardGrid = new Section(
@@ -117,36 +115,34 @@ api.getInitialCards().then((res) => {
 	);
 	cardGrid.renderItems();
 
-//CardPopup
-const cardPopup = new PopupWithForm({
-	popupSelector: addCardModal,
-	handleSubmitForm: (data) => {
-		const card = new Card(
-			{
-				data: { name: inputTitle.value, link: inputUrl.value },
-				handleCardClick: () => {
-					enlargeImage.open({ name: data.title, link: data.url });
-				},
-			},
-			cardTemplateSelector
-		);
-		cardGrid.addItem(card.createCard());
+	//CardPopup
+	const cardPopup = new PopupWithForm({
+		popupSelector: addCardModal,
+		handleSubmitForm: (data) => {
+			api.addCard(data).then((res) => {
+				const card = new Card(
+					{
+						data,
+						handleCardClick: () => {
+							enlargeImage.open({ name: data.name, link: data.link });
+						},
+					},
+					cardTemplateSelector
+				);
+				cardGrid.addItem(card.createCard());
+				addCardValidator.makeButtonInactive();
+			});
+		},
+	});
+	cardPopup.setEventListeners();
+
+	addCardButton.addEventListener("click", () => {
 		addCardValidator.makeButtonInactive();
-	},
-});
-cardPopup.setEventListeners();
-
-addCardButton.addEventListener("click", () => {
-	addCardValidator.makeButtonInactive();
-	cardPopup.open();
+		cardPopup.open();
+	});
 });
 
+api.getUserInfo().then((res) => {
+	console.log("!!", res);
+	userInfo.setUserInfo(res.name, res.about);
 });
-
-
-
-api.getUserInfo()
-.then(res =>{
-	console.log('!!', res)
-userInfo.setUserInfo(res.name, res.about)
-})

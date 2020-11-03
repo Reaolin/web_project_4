@@ -21,6 +21,19 @@ class Api {
 			.catch(err => console.log(err))
   }
   
+  addCard({name, link}){
+    return fetch(this._baseURL + "/cards", {
+      headers: this._headers,
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        link
+      })
+		})
+      .then(res =>  res.ok ? res.json() : Promise.reject(res.status))
+			.catch(err => console.log(err))
+
+  }
 
 	// other methods for working with the API
 }
