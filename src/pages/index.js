@@ -1,10 +1,11 @@
-import './index.css';
+import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 const dataConfig = {
 	inputSelector: ".modal__input",
@@ -49,6 +50,8 @@ const formJob = document.querySelector(
 	".form__job-input"
 ); /* creates a constant variable for the .form__job-input class */
 
+
+
 //userInfo
 const userInfo = new UserInfo(profileName, profileJob);
 //Form Popup
@@ -74,38 +77,7 @@ const inputUrl = document.querySelector(".form__url-input");
 const photoGrid = document.querySelector(".photo-grid");
 
 //initial cards autocreated each time the page refreshes
-const initialCards = [
-	{
-		name: "Yosemite Valley",
-		link:
-			"https://images.unsplash.com/photo-1496245454747-b17bebc37e41?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-	},
-	{
-		name: "A Tree Somewhere",
-		link:
-			"https://images.unsplash.com/photo-1591971737811-cf7de8c11f32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
-	},
-	{
-		name: "The Moon",
-		link:
-			"https://images.unsplash.com/photo-1592035187437-47c0fe77a452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1391&q=80",
-	},
-	{
-		name: "Gatlinburg, TN",
-		link:
-			"https://images.unsplash.com/photo-1574368725712-5b70cdeb5a76?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=848&q=80",
-	},
-	{
-		name: "Chilhowee Mountain",
-		link:
-			"https://images.unsplash.com/photo-1590096598321-a42e180df31d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=802&q=80",
-	},
-	{
-		name: "Waterfall",
-		link:
-			"https://images.unsplash.com/photo-1541294725825-94318746d378?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80",
-	},
-];
+
 
 //image display variables
 const imgModal = document.querySelector(".modal_type_display-image");
@@ -114,27 +86,36 @@ const cardTemplateSelector = ".card-template";
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
 
-//Creates Initial Card set
-const cardGrid = new Section(
-	{
-		data: initialCards,
-		renderer: (data) => {
-			const newCards = new Card(
-				{
-					data,
-					handleCardClick: () => {
-						enlargeImage.open(data);
-					},
-				},
-				cardTemplateSelector
-			);
-
-			cardGrid.addItem(newCards.createCard());
-		},
+const api = new Api({
+	baseURL: "https://around.nomoreparties.co/v1/group-5",
+	headers: {
+		authorization: "97759523-392d-4e85-9860-1537a0a1a99b",
+		"Content-Type": "application/json",
 	},
-	photoGrid
-);
-cardGrid.renderItems();
+});
+
+api.getInitialCards().then((res) => {
+	//Creates Initial Card set
+	const cardGrid = new Section(
+		{
+			data: res,
+			renderer: (data) => {
+				const newCards = new Card(
+					{
+						data,
+						handleCardClick: () => {
+							enlargeImage.open(data);
+						},
+					},
+					cardTemplateSelector
+				);
+
+				cardGrid.addItem(newCards.createCard());
+			},
+		},
+		photoGrid
+	);
+	cardGrid.renderItems();
 
 //CardPopup
 const cardPopup = new PopupWithForm({
@@ -159,3 +140,13 @@ addCardButton.addEventListener("click", () => {
 	addCardValidator.makeButtonInactive();
 	cardPopup.open();
 });
+
+});
+
+
+
+api.getUserInfo()
+.then(res =>{
+	console.log('!!', res)
+userInfo.setUserInfo(res.name, res.about)
+})
