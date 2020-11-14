@@ -15,6 +15,16 @@ const dataConfig = {
 	errorClass: "modal__error_visible",
 };
 
+//creates the API info
+const api = new Api({
+	baseURL: "https://around.nomoreparties.co/v1/group-5",
+	headers: {
+		authorization: "97759523-392d-4e85-9860-1537a0a1a99b",
+		"Content-Type": "application/json",
+	},
+});
+
+
 //wrappers
 const editProfileModal = document.querySelector(
 	".modal_type_edit-profile"
@@ -55,8 +65,11 @@ const userInfo = new UserInfo(profileName, profileJob);
 //Form Popup
 const formPopup = new PopupWithForm({
 	popupSelector: editProfileModal,
-	handleSubmitForm: () => {
+	handleSubmitForm: (data) => {
 		userInfo.setUserInfo(formName.value, formJob.value);
+
+		api.setUserInfo({name: data.name, about: data.occupation})
+		.catch(err => console.log(err));
 	},
 });
 formPopup.setEventListeners();
@@ -68,10 +81,6 @@ editBtn.addEventListener("click", () => {
 	formPopup.open();
 });
 //card variables
-const inputTitle = document.querySelector(
-	".form__title-input"
-); /* creates a constant variable for the .form__title-input class */
-const inputUrl = document.querySelector(".form__url-input");
 const photoGrid = document.querySelector(".photo-grid");
 
 //initial cards autocreated each time the page refreshes
@@ -83,16 +92,11 @@ const cardTemplateSelector = ".card-template";
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
 
-const api = new Api({
-	baseURL: "https://around.nomoreparties.co/v1/group-5",
-	headers: {
-		authorization: "97759523-392d-4e85-9860-1537a0a1a99b",
-		"Content-Type": "application/json",
-	},
-});
 
+//initial cards autocreated each time the page refreshes
 //get cards from API
 api.getInitialCards().then((res) => {
+
 	//Creates Initial Card set
 	const cardGrid = new Section(
 		{
@@ -104,6 +108,14 @@ api.getInitialCards().then((res) => {
 						handleCardClick: () => {
 							enlargeImage.open(data);
 						},
+						handleCardDelete: (cardId) =>{
+							api.removeCard(cardId)
+							.then(() => {
+								newCards.deleteCard();
+							})
+							.catch(err => console.log(err))
+						},
+						
 					},
 					cardTemplateSelector
 				);
