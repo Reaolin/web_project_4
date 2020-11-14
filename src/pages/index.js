@@ -24,7 +24,6 @@ const api = new Api({
 	},
 });
 
-
 //wrappers
 const editProfileModal = document.querySelector(
 	".modal_type_edit-profile"
@@ -68,8 +67,9 @@ const formPopup = new PopupWithForm({
 	handleSubmitForm: (data) => {
 		userInfo.setUserInfo(formName.value, formJob.value);
 
-		api.setUserInfo({name: data.name, about: data.occupation})
-		.catch(err => console.log(err));
+		api
+			.setUserInfo({ name: data.name, about: data.occupation })
+			.catch((err) => console.log(err));
 	},
 });
 formPopup.setEventListeners();
@@ -92,11 +92,9 @@ const cardTemplateSelector = ".card-template";
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
 
-
 //initial cards autocreated each time the page refreshes
 //get cards from API
 api.getInitialCards().then((res) => {
-
 	//Creates Initial Card set
 	const cardGrid = new Section(
 		{
@@ -108,14 +106,14 @@ api.getInitialCards().then((res) => {
 						handleCardClick: () => {
 							enlargeImage.open(data);
 						},
-						handleCardDelete: (cardId) =>{
-							api.removeCard(cardId)
-							.then(() => {
-								newCards.deleteCard();
-							})
-							.catch(err => console.log(err))
+						handleCardDelete: (cardId) => {
+							api
+								.removeCard(cardId)
+								.then(() => {
+									newCards.deleteCard();
+								})
+								.catch((err) => console.log(err));
 						},
-						
 					},
 					cardTemplateSelector
 				);
