@@ -3,14 +3,17 @@ const imgCaption = document.querySelector(".modal__caption");
 const imgPopup = document.querySelector(".modal__img");
 
 class Card {
-	constructor({ data, handleCardClick, handleCardDelete }, cardTemplateSelector) {
+	constructor({ data, handleCardClick, handleCardDelete, handleCardLike }, cardTemplateSelector) {
 		this._name = data.name;
 		this._link = data.link;
 		this._id = data._id;
 
 		this._handleCardClick = handleCardClick;
-		this._handleCardDelete =handleCardDelete;
+		this._handleCardDelete = handleCardDelete;
+		this._handleCardLike = handleCardLike;
 		this._cardTemplateSelector = cardTemplateSelector;
+		this._card = this._getCardTemplate();
+		this.heartLike = this._card.querySelector('.card__heart');
 	}
 
 	getId(){
@@ -34,12 +37,14 @@ class Card {
 
 		cardHeartButton.addEventListener("click", (e) => {
 			this._handleHeartButton(e);
+			this._handleCardLike(this.getId());
 			//change heart
 		});
 
 		cardRemoveButton.addEventListener("click", (e) => {
 			//remove card
-			this._handleCardDelete(this.getId);
+			this._deleteCard();
+			this._handleCardDelete(this.getId());
 		});
 
 		cardImg.addEventListener("click", () => {
@@ -54,7 +59,7 @@ class Card {
 		toggleLike(e);
 	}
 
-	deleteCard() {
+	_deleteCard() {
 		this._card.remove(".card");
 	}
 

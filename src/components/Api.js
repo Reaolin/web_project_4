@@ -49,8 +49,7 @@ class Api {
 
 	// DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
 	removeCard(cardId) {
-		console.log(cardId);
-		return fetch(this._baseUrl + "/cards/" + cardId, {
+		return fetch(this._baseURL + "/cards/" + cardId, {
 			headers: this._headers,
 			method: "DELETE",
 		})
@@ -59,8 +58,8 @@ class Api {
 	}
 
 	//PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-	addLikes() {
-		return fetch(this._baseUrl + "/cards/likes/" + cardId, {
+	addLikes(cardId) {
+		return fetch(this._baseURL + "/cards/likes/" + cardId, {
 			headers: this._headers,
 			method: "PUT",
 		})
@@ -68,8 +67,8 @@ class Api {
 			.catch((err) => console.log(err));
 	}
 	//DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
-	removeLikes() {
-		return fetch(this._baseUrl + "/cards/likes/" + cardId, {
+	removeLikes(cardId) {
+		return fetch(this._baseURL + "/cards/likes/" + cardId, {
 			headers: this._headers,
 			method: "DELETE",
 		})
@@ -89,7 +88,7 @@ class Api {
 			.catch((err) => console.log(err));
 	}
 
-	// other methods for working with the API
+
 }
 
 export default Api;

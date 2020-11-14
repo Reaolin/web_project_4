@@ -80,10 +80,13 @@ editBtn.addEventListener("click", () => {
 	formJob.value = currentUserInfo.job;
 	formPopup.open();
 });
-//card variables
-const photoGrid = document.querySelector(".photo-grid");
 
-//initial cards autocreated each time the page refreshes
+/*//Avatar
+const avatarPopup = new PopupWithForm({
+	popupSelector: editAvatarModal,
+
+})
+*/
 
 //image display variables
 const imgModal = document.querySelector(".modal_type_display-image");
@@ -92,9 +95,13 @@ const cardTemplateSelector = ".card-template";
 const enlargeImage = new PopupWithImage(imgModal);
 enlargeImage.setEventListeners();
 
+//card variables
+const photoGrid = document.querySelector(".photo-grid");
+
 //initial cards autocreated each time the page refreshes
 //get cards from API
 api.getInitialCards().then((res) => {
+	console.log(res);
 	//Creates Initial Card set
 	const cardGrid = new Section(
 		{
@@ -107,13 +114,18 @@ api.getInitialCards().then((res) => {
 							enlargeImage.open(data);
 						},
 						handleCardDelete: (cardId) => {
-							api
-								.removeCard(cardId)
-								.then(() => {
-									newCards.deleteCard();
-								})
-								.catch((err) => console.log(err));
+							api.removeCard(cardId);
 						},
+						handleCardLike: (cardId) => {
+							if (newCards.heartLike.classList.contains("card__like")) {
+							  newCards.heartLike.classList.remove("card__like");
+							  api.removeLikes(cardId)
+							} else {
+							  newCards.heartLike.classList.add("card__like");
+							  api.addLikes(cardId)
+
+							}
+						  },
 					},
 					cardTemplateSelector
 				);
