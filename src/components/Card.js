@@ -20,7 +20,7 @@ class Card {
 		this._handleCardLike = handleCardLike;
 		this._cardTemplateSelector = cardTemplateSelector;
 		this._card = this._getCardTemplate();
-		this._heartLike = this._card.querySelector(".card__heart");
+		this.heartLike = this._card.querySelector(".card__heart");
 	}
 
 	getId() {
@@ -29,7 +29,7 @@ class Card {
 
 	_showLikes() {
 		if (this._likes.some((like) => like._id === this._userID)) {
-			this._heartLike
+			this.heartLike
 				.classList.add("card__like");
 				console.log(this._likes);
 				console.log(this._heartLike);
@@ -47,6 +47,13 @@ class Card {
 			.cloneNode(true);
 
 		return cardTemplate;
+	}
+
+	_handleHeartButton(e) {
+		function toggleLike(e) {
+			e.target.classList.toggle("card__like");
+		}
+		toggleLike(e);
 	}
 
 	_addEventListener() {
@@ -77,12 +84,7 @@ class Card {
 		});
 	}
 
-	_handleHeartButton(e) {
-		function toggleLike(e) {
-			e.target.classList.toggle("card__like");
-		}
-		toggleLike(e);
-	}
+
 
 	_deleteCard() {
 		this._card.remove(".card");

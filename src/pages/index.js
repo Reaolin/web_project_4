@@ -112,6 +112,7 @@ function adding(isLoading, modal) {
 	  modal.querySelector(".modal__button").textContent = "Goodbye!";
 	}
   }
+  const heartLike = 
 
 api.getUserInfo().then((res) => {
 const userIdInfo = res._id;
@@ -139,7 +140,7 @@ api.getInitialCards().then((res) => {
 						},
 						handleCardDelete: (cardId) => {
 							api.removeCard(cardId).then(() =>{
-								
+
 							});
 						},
 						handleCardLike: (cardId) => {
