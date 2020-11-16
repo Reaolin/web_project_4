@@ -5,21 +5,22 @@ const imgPopup = document.querySelector(".modal__img");
 class Card {
 	constructor(
 		{ data, handleCardClick, handleCardDelete, handleCardLike },
-		cardTemplateSelector, userId,
+		cardTemplateSelector, userID,
 	) {
 		this._name = data.name;
 		this._link = data.link;
 		this._id = data._id;
 		this._likes = data.likes;
 		this._totalLikes = this._likes.length;
-		this._userId = userId;
+		this._owner = data.owner;
+		this._userID = userID;
 
 		this._handleCardClick = handleCardClick;
 		this._handleCardDelete = handleCardDelete;
 		this._handleCardLike = handleCardLike;
 		this._cardTemplateSelector = cardTemplateSelector;
 		this._card = this._getCardTemplate();
-		this.heartLike = this._card.querySelector(".card__heart");
+		this._heartLike = this._card.querySelector(".card__heart");
 	}
 
 	getId() {
@@ -27,9 +28,11 @@ class Card {
 	}
 
 	_showLikes() {
-		if (this._likes.some((like) => like._id === this._userId)) {
-			this.heartLike
+		if (this._likes.some((like) => like._id === this._userID)) {
+			this._heartLike
 				.classList.add("card__like");
+				console.log(this._likes);
+				console.log(this._heartLike);
 		}
 	}
 
@@ -50,6 +53,12 @@ class Card {
 		const cardImg = this._card.querySelector(".card__img");
 		const cardHeartButton = this._card.querySelector(".card__heart");
 		const cardRemoveButton = this._card.querySelector(".card__remove-btn");
+		const deleteButton = this._card.querySelector(".card__remove-btn");
+		
+		//don't show remove button
+		if(this._owner._id !== this._userID){
+			deleteButton.style.display = 'none';
+		}
 
 		cardHeartButton.addEventListener("click", (e) => {
 			this._handleHeartButton(e);

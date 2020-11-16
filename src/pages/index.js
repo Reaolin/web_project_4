@@ -32,15 +32,21 @@ const addCardModal = document.querySelector(
 	".modal_type_add-card"
 ); /* variable for the whole .modal_type_add-card class*/
 
+const editAvatarModal = document.querySelector(".modal_type_edit-avatar");
+/* variable for the whole .modal_type_add-card class*/
+
 const editProfileForm = editProfileModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
+const editAvatarForm = editAvatarModal.querySelector(".modal__form");
 
 //validation
 const editProfileValidator = new FormValidator(dataConfig, editProfileForm);
 const addCardValidator = new FormValidator(dataConfig, addCardForm);
+const editAvatarValidator = new FormValidator(dataConfig, editAvatarForm);
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
+editAvatarValidator.enableValidation();
 
 //buttons & DOMS
 const editBtn = document.querySelector(
@@ -49,6 +55,7 @@ const editBtn = document.querySelector(
 const addCardButton = document.querySelector(
 	".profile__add-btn"
 ); /* creates the variable editBtn that equals the class .profile__add-btn(aka we want to select the plus sing, which we've named .profile__edit-btn)*/
+const editAvatarBtn = document.querySelector(".profile__avatar_edit-btn");
 
 const profileName = document.querySelector(".profile-info__title");
 const profileJob = document.querySelector(".profile-info__sub-title");
@@ -81,12 +88,6 @@ editBtn.addEventListener("click", () => {
 	formPopup.open();
 });
 
-/*//Avatar
-const avatarPopup = new PopupWithForm({
-	popupSelector: editAvatarModal,
-
-})
-*/
 
 //image display variables
 const imgModal = document.querySelector(".modal_type_display-image");
@@ -97,11 +98,28 @@ enlargeImage.setEventListeners();
 
 //card variables
 const photoGrid = document.querySelector(".photo-grid");
+function adding(isLoading, modal) {
+	if (isLoading) {
+	  modal.querySelector(".modal__button").textContent = "Adding...";
+	} else {
+	  modal.querySelector(".modal__button").textContent = "Save";
+	}
+  }
+  function deleting(isLoading, modal) {
+	if (isLoading) {
+	  modal.querySelector(".modal__button").textContent = "Wait for it...";
+	} else {
+	  modal.querySelector(".modal__button").textContent = "Goodbye!";
+	}
+  }
 
 api.getUserInfo().then((res) => {
+const userIdInfo = res._id;
 	console.log("!!", res._id);
+	console.log("11", userIdInfo);
 	userInfo.setUserInfo(res.name, res.about);
-});
+
+
 
 
 //initial cards autocreated each time the page refreshes
@@ -120,23 +138,28 @@ api.getInitialCards().then((res) => {
 							enlargeImage.open(data);
 						},
 						handleCardDelete: (cardId) => {
-							api.removeCard(cardId);
+							api.removeCard(cardId).then(() =>{
+								
+							});
 						},
 						handleCardLike: (cardId) => {
 							if (newCards.heartLike.classList.contains("card__like")) {
-							  newCards.heartLike.classList.remove("card__like");
-							  api.removeLikes(cardId).then(res => newCards.getTotalLikes(res.likes.length))
-							  .catch(err => console.log(err))
+								newCards.heartLike.classList.remove("card__like");
+								api
+									.removeLikes(cardId)
+									.then((res) => newCards.getTotalLikes(res.likes.length))
+									.catch((err) => console.log(err));
 							} else {
-							  newCards.heartLike.classList.add("card__like");
-							  api.addLikes(cardId)
-							  .then(res => newCards.getTotalLikes(res.likes.length))
-							  .catch(err => console.log(err))
-
+								newCards.heartLike.classList.add("card__like");
+								api
+									.addLikes(cardId)
+									.then((res) => newCards.getTotalLikes(res.likes.length))
+									.catch((err) => console.log(err));
 							}
-						  },
+						},
 					},
-					cardTemplateSelector
+					cardTemplateSelector,
+					userIdInfo
 				);
 
 				cardGrid.addItem(newCards.createCard());
@@ -173,4 +196,42 @@ api.getInitialCards().then((res) => {
 	});
 });
 
+});
+const avatarImage = document.querySelector(".profile__avatar");
 
+
+
+function loading(isLoading, modal) {
+	if (isLoading) {
+	  modal.querySelector(".modal__button").textContent = "Saving...";
+	} else {
+	  modal.querySelector(".modal__button").textContent = "Save";
+	}
+  }
+  function handleAvatarEdit(data) {
+	//loading(true, editAvatarModal);
+	api
+		.setAvatar({
+			avatar: data.avatar,
+		})
+		.then((res) => {
+			avatarImage.src = res.avatar;
+			loading(false, editAvatarModal);
+			editAvatar.close();
+		})
+		.catch((err) => console.log(err));
+}
+
+const editAvatar = new PopupWithForm({
+	popupSelector: editAvatarModal,
+	handleSubmitForm: (data) => {
+		handleAvatarEdit(data);
+	},
+});
+
+editAvatarBtn.addEventListener("click", () => {
+	editAvatar.open();
+	editAvatarValidator.makeButtonInactive();
+});
+
+editAvatar.setEventListeners();
