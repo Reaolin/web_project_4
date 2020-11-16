@@ -11,3 +11,9 @@
             margin-right: 0px;
         }
     }
+
+    .profile__avatar:hover{
+        opacity: .6;
+        cursor: url('../../../images/mouse.svg'), auto;
+    
+}

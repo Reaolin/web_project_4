@@ -19,7 +19,7 @@ class Api {
 		})
 			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
 			.catch((err) => console.log(err));
-	}
+  }
 
 	setUserInfo({ name, about }) {
 		return fetch(this._baseURL + "/users/me", {
@@ -87,8 +87,6 @@ class Api {
 			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
 			.catch((err) => console.log(err));
 	}
-
-
 }
 
 export default Api;

@@ -98,6 +98,12 @@ enlargeImage.setEventListeners();
 //card variables
 const photoGrid = document.querySelector(".photo-grid");
 
+api.getUserInfo().then((res) => {
+	console.log("!!", res._id);
+	userInfo.setUserInfo(res.name, res.about);
+});
+
+
 //initial cards autocreated each time the page refreshes
 //get cards from API
 api.getInitialCards().then((res) => {
@@ -119,10 +125,13 @@ api.getInitialCards().then((res) => {
 						handleCardLike: (cardId) => {
 							if (newCards.heartLike.classList.contains("card__like")) {
 							  newCards.heartLike.classList.remove("card__like");
-							  api.removeLikes(cardId)
+							  api.removeLikes(cardId).then(res => newCards.getTotalLikes(res.likes.length))
+							  .catch(err => console.log(err))
 							} else {
 							  newCards.heartLike.classList.add("card__like");
 							  api.addLikes(cardId)
+							  .then(res => newCards.getTotalLikes(res.likes.length))
+							  .catch(err => console.log(err))
 
 							}
 						  },
@@ -164,7 +173,4 @@ api.getInitialCards().then((res) => {
 	});
 });
 
-api.getUserInfo().then((res) => {
-	console.log("!!", res);
-	userInfo.setUserInfo(res.name, res.about);
-});
+

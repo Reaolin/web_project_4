@@ -3,23 +3,39 @@ const imgCaption = document.querySelector(".modal__caption");
 const imgPopup = document.querySelector(".modal__img");
 
 class Card {
-	constructor({ data, handleCardClick, handleCardDelete, handleCardLike }, cardTemplateSelector) {
+	constructor(
+		{ data, handleCardClick, handleCardDelete, handleCardLike },
+		cardTemplateSelector, userId,
+	) {
 		this._name = data.name;
 		this._link = data.link;
 		this._id = data._id;
+		this._likes = data.likes;
+		this._totalLikes = this._likes.length;
+		this._userId = userId;
 
 		this._handleCardClick = handleCardClick;
 		this._handleCardDelete = handleCardDelete;
 		this._handleCardLike = handleCardLike;
 		this._cardTemplateSelector = cardTemplateSelector;
 		this._card = this._getCardTemplate();
-		this.heartLike = this._card.querySelector('.card__heart');
+		this.heartLike = this._card.querySelector(".card__heart");
 	}
 
-	getId(){
+	getId() {
 		return this._id;
 	}
-	
+
+	_showLikes() {
+		if (this._likes.some((like) => like._id === this._userId)) {
+			this.heartLike
+				.classList.add("card__like");
+		}
+	}
+
+	getTotalLikes() {
+		this._card.querySelector(".card__like-total").textContent = this._totalLikes;
+	}
 
 	_getCardTemplate() {
 		const cardTemplate = document
@@ -74,6 +90,8 @@ class Card {
 		cardImage.alt = this._name; //places the name as Alt for accesibility
 
 		this._addEventListener();
+		this.getTotalLikes(this._likes.length);
+		this._showLikes();
 
 		return this._card;
 	}
