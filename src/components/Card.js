@@ -13,8 +13,8 @@ class Card {
 		this._likes = data.likes;
 		this._totalLikes = this._likes.length;
 		this._owner = data.owner;
-		this._userID = userID;
 
+		this._userID = userID;
 		this._handleCardClick = handleCardClick;
 		this._handleCardDelete = handleCardDelete;
 		this._handleCardLike = handleCardLike;
@@ -36,8 +36,8 @@ class Card {
 		}
 	}
 
-	getTotalLikes() {
-		this._card.querySelector(".card__like-total").textContent = this._totalLikes;
+	getTotalLikes(allTheLikes) {
+		this._card.querySelector(".card__like-total").textContent = allTheLikes;
 	}
 
 	_getCardTemplate() {
