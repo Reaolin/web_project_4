@@ -32,7 +32,7 @@ class Card {
 			this.heartLike
 				.classList.add("card__like");
 				console.log(this._likes);
-				console.log(this._heartLike);
+				console.log(this.heartLike);
 		}
 	}
 
