@@ -112,7 +112,6 @@ function adding(isLoading, modal) {
 	  modal.querySelector(".modal__button").textContent = "Goodbye!";
 	}
   }
-  const heartLike = 
 
 api.getUserInfo().then((res) => {
 const userIdInfo = res._id;
@@ -121,7 +120,12 @@ const userIdInfo = res._id;
 	userInfo.setUserInfo(res.name, res.about);
 
 
+const deleteButton = document.querySelector(".modal_type_delete-card")
 
+/*
+const cardDelete = new PopupWithForm(deleteButton);
+cardDelete.setEventListeners();
+*/
 
 //initial cards autocreated each time the page refreshes
 //get cards from API
@@ -139,9 +143,14 @@ api.getInitialCards().then((res) => {
 							enlargeImage.open(data);
 						},
 						handleCardDelete: (cardId) => {
+							cardDelete.open(cardId);
+							cardDelete.setSubmit(() =>{
 							api.removeCard(cardId).then(() =>{
+								newCards.removeCard(cardId);
 
 							});
+							})
+							
 						},
 						handleCardLike: (cardId) => {
 							if (newCards.heartLike.classList.contains("card__like")) {
@@ -185,6 +194,7 @@ api.getInitialCards().then((res) => {
 					cardTemplateSelector
 				);
 				cardGrid.addItem(card.createCard());
+				card._showLikes();
 				addCardValidator.makeButtonInactive();
 			});
 		},
@@ -236,3 +246,5 @@ editAvatarBtn.addEventListener("click", () => {
 });
 
 editAvatar.setEventListeners();
+
+

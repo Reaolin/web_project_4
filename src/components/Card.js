@@ -19,7 +19,8 @@ class Card {
 		this._handleCardDelete = handleCardDelete;
 		this._handleCardLike = handleCardLike;
 		this._cardTemplateSelector = cardTemplateSelector;
-		this._card = this._getCardTemplate();
+		this._cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
+		this._card = this._cardElement;
 		this.heartLike = this._card.querySelector(".card__heart");
 	}
 
@@ -27,14 +28,7 @@ class Card {
 		return this._id;
 	}
 
-	_showLikes() {
-		if (this._likes.some((like) => like._id === this._userID)) {
-			this.heartLike
-				.classList.add("card__like");
-				console.log(this._likes);
-				console.log(this.heartLike);
-		}
-	}
+	
 
 	getTotalLikes(allTheLikes) {
 		this._card.querySelector(".card__like-total").textContent = allTheLikes;
@@ -48,27 +42,20 @@ class Card {
 
 		return cardTemplate;
 	}
-
-	_handleHeartButton(e) {
-		function toggleLike(e) {
-			e.target.classList.toggle("card__like");
-		}
-		toggleLike(e);
-	}
+ 
 
 	_addEventListener() {
 		const cardImg = this._card.querySelector(".card__img");
 		const cardHeartButton = this._card.querySelector(".card__heart");
 		const cardRemoveButton = this._card.querySelector(".card__remove-btn");
-		const deleteButton = this._card.querySelector(".card__remove-btn");
 		
 		//don't show remove button
 		if(this._owner._id !== this._userID){
-			deleteButton.style.display = 'none';
+			cardRemoveButton.style.display = 'none';
 		}
 
-		cardHeartButton.addEventListener("click", (e) => {
-			this._handleHeartButton(e);
+		cardHeartButton.addEventListener("click", () => {
+
 			this._handleCardLike(this.getId());
 			//change heart
 		});
@@ -89,11 +76,16 @@ class Card {
 	_deleteCard() {
 		this._card.remove(".card");
 	}
-
+	_showLikes() {
+		if (this._likes.some((like) => like._id === this._userID)) {
+			this.heartLike
+				.classList.add("card__like");
+				console.log(this._likes);
+				console.log(this.heartLike);
+		}
+	}
 	createCard() {
-		const cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
-		this._card = cardElement;
-
+		
 		const cardImage = this._card.querySelector(".card__img");
 
 		this._card.querySelector(".card__title").textContent = this._name; //places the name, from the data, as the text content of the Card Title class and
