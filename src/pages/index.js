@@ -127,7 +127,7 @@ const userIdInfo = res._id;
 	console.log("!!", res._id);
 	console.log("11", userIdInfo);
 	userInfo.setUserInfo(res.name, res.about);
-
+	avatarImage.src = res.avatar;
 
 
 
@@ -178,7 +178,7 @@ api.getInitialCards().then((res) => {
 					cardTemplateSelector,
 					userIdInfo
 				);
-
+				newCards.showRemoveButton();
 				cardGrid.addItem(newCards.createCard());
 			},
 		},
@@ -197,6 +197,34 @@ api.getInitialCards().then((res) => {
 						data,
 						handleCardClick: () => {
 							enlargeImage.open({ name: data.name, link: data.link });
+						},
+						handleCardDelete: (cardId) => {
+							deleteCard.open();
+							deleteCard.setSubmit(() =>{
+								deleting(true, deleteCardModal);
+							api.removeCard(cardId).then(() =>{
+								card.deleteCard();
+								deleting(false, deleteCardModal);
+								deleteCard.close();
+
+							});	
+							})
+							
+						},
+						handleCardLike: (cardId) => {
+							if (card.heartLike.classList.contains("card__like")) {
+								card.heartLike.classList.remove("card__like");
+								api
+									.removeLikes(cardId)
+									.then((res) => card.getTotalLikes(res.likes.length))
+									.catch((err) => console.log(err));
+							} else {
+								card.heartLike.classList.add("card__like");
+								api
+									.addLikes(cardId)
+									.then((res) => card.getTotalLikes(res.likes.length))
+									.catch((err) => console.log(err));
+							}
 						},
 					},
 					cardTemplateSelector

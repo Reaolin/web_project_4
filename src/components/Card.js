@@ -21,6 +21,7 @@ class Card {
 		this._cardElement = this._getCardTemplate(); //clones all children(img,button,title, etc) under the parent (.card)
 		this._card = this._cardElement;
 		this.heartLike = this._card.querySelector(".card__heart");
+		this._cardRemoveButton = this._card.querySelector(".card__remove-btn");
 	}
 
 	getId() {
@@ -45,13 +46,7 @@ class Card {
 
 	_addEventListener() {
 		const cardImg = this._card.querySelector(".card__img");
-		const cardHeartButton = this._card.querySelector(".card__heart");
-		const cardRemoveButton = this._card.querySelector(".card__remove-btn");
-		
-		//don't show remove button
-		if(this._owner._id !== this._userID){
-			cardRemoveButton.style.display = 'none';
-		}
+		const cardHeartButton = this._card.querySelector(".card__heart");		
 
 		cardHeartButton.addEventListener("click", () => {
 
@@ -59,7 +54,7 @@ class Card {
 			//change heart
 		});
 
-		cardRemoveButton.addEventListener("click", (e) => {
+		this._cardRemoveButton.addEventListener("click", (e) => {
 			//remove card
 			//this._deleteCard();
 			this._handleCardDelete(this.getId());
@@ -70,7 +65,12 @@ class Card {
 		});
 	}
 
-
+showRemoveButton(){
+		//don't show remove button
+		if(this._owner._id !== this._userID){
+			this._cardRemoveButton.style.display = 'none';
+		}
+}
 
 	deleteCard() {
 		this._card.remove(".card");
