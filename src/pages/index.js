@@ -120,12 +120,7 @@ const userIdInfo = res._id;
 	userInfo.setUserInfo(res.name, res.about);
 
 
-const deleteButton = document.querySelector(".modal_type_delete-card")
 
-/*
-const cardDelete = new PopupWithForm(deleteButton);
-cardDelete.setEventListeners();
-*/
 
 //initial cards autocreated each time the page refreshes
 //get cards from API
@@ -143,14 +138,9 @@ api.getInitialCards().then((res) => {
 							enlargeImage.open(data);
 						},
 						handleCardDelete: (cardId) => {
-							cardDelete.open(cardId);
-							cardDelete.setSubmit(() =>{
 							api.removeCard(cardId).then(() =>{
-								newCards.removeCard(cardId);
 
 							});
-							})
-							
 						},
 						handleCardLike: (cardId) => {
 							if (newCards.heartLike.classList.contains("card__like")) {
@@ -183,7 +173,7 @@ api.getInitialCards().then((res) => {
 	const cardPopup = new PopupWithForm({
 		popupSelector: addCardModal,
 		handleSubmitForm: (data) => {
-			api.addCard(data).then((res) => {
+			api.addCard(data).then((data) => {
 				const card = new Card(
 					{
 						data,
@@ -246,5 +236,4 @@ editAvatarBtn.addEventListener("click", () => {
 });
 
 editAvatar.setEventListeners();
-
 

@@ -11,7 +11,6 @@ class Card {
 		this._link = data.link;
 		this._id = data._id;
 		this._likes = data.likes;
-		this._totalLikes = this._likes.length;
 		this._owner = data.owner;
 
 		this._userID = userID;
