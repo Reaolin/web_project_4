@@ -9,6 +9,7 @@
 
         .profile__avatar{
             margin-right: 0px;
+            position: relative;
         }
     }
 

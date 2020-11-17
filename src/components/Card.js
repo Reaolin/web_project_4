@@ -61,7 +61,7 @@ class Card {
 
 		cardRemoveButton.addEventListener("click", (e) => {
 			//remove card
-			this._deleteCard();
+			//this._deleteCard();
 			this._handleCardDelete(this.getId());
 		});
 
@@ -72,7 +72,7 @@ class Card {
 
 
 
-	_deleteCard() {
+	deleteCard() {
 		this._card.remove(".card");
 	}
 	_showLikes() {

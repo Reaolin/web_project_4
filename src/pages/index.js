@@ -98,6 +98,7 @@ enlargeImage.setEventListeners();
 
 //card variables
 const photoGrid = document.querySelector(".photo-grid");
+
 function adding(isLoading, modal) {
 	if (isLoading) {
 	  modal.querySelector(".modal__button").textContent = "Adding...";
@@ -112,6 +113,14 @@ function adding(isLoading, modal) {
 	  modal.querySelector(".modal__button").textContent = "Goodbye!";
 	}
   }
+
+const deleteCardModal = document.querySelector(".modal_type_delete-card");
+
+const deleteCard = new PopupWithForm({
+	popupSelector: deleteCardModal,
+});
+deleteCard.setEventListeners();
+
 
 api.getUserInfo().then((res) => {
 const userIdInfo = res._id;
@@ -138,9 +147,17 @@ api.getInitialCards().then((res) => {
 							enlargeImage.open(data);
 						},
 						handleCardDelete: (cardId) => {
+							deleteCard.open();
+							deleteCard.setSubmit(() =>{
+								deleting(true, deleteCardModal);
 							api.removeCard(cardId).then(() =>{
+								newCards.deleteCard();
+								deleting(false, deleteCardModal);
+								deleteCard.close();
 
-							});
+							});	
+							})
+							
 						},
 						handleCardLike: (cardId) => {
 							if (newCards.heartLike.classList.contains("card__like")) {
@@ -173,6 +190,7 @@ api.getInitialCards().then((res) => {
 	const cardPopup = new PopupWithForm({
 		popupSelector: addCardModal,
 		handleSubmitForm: (data) => {
+			adding(true, addCardModal);
 			api.addCard(data).then((data) => {
 				const card = new Card(
 					{
@@ -210,7 +228,7 @@ function loading(isLoading, modal) {
 	}
   }
   function handleAvatarEdit(data) {
-	//loading(true, editAvatarModal);
+	loading(true, editAvatarModal);
 	api
 		.setAvatar({
 			avatar: data.avatar,
