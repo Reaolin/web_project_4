@@ -187,7 +187,8 @@ api.getAppInfo().then(([userData, cardListData]) => {
 							newCards.deleteCard();
 							handleIsLoading(false, deleteCardModal, "Goodbye!");
 							deleteCard.close();
-						});
+						})
+						.catch((err) => console.log(err));
 					});
 				},
 				handleCardLike: (cardId) => {
@@ -211,7 +212,8 @@ api.getAppInfo().then(([userData, cardListData]) => {
 		);
 		cardGrid.addItem(newCards.createCard());
 	}
-});
+})
+.catch((err) => console.log(err));
 /*function loading(isLoading, modal) {
 	if (isLoading) {
 		modal.querySelector(".modal__button").textContent = "Saving...";

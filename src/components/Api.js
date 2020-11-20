@@ -8,22 +8,18 @@ class Api {
 	getInitialCards() {
 		return fetch(this._baseURL + "/cards", {
 			headers: this._headers,
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 
 	getUserInfo() {
 		return fetch(this._baseURL + "/users/me", {
 			headers: this._headers,
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
-  }
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
+	}
 
-  getAppInfo() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()])
-  }
+	getAppInfo() {
+		return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+	}
 
 	setUserInfo({ name, about }) {
 		return fetch(this._baseURL + "/users/me", {
@@ -33,9 +29,7 @@ class Api {
 				name,
 				about,
 			}),
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 
 	addCard({ name, link }) {
@@ -46,9 +40,7 @@ class Api {
 				name,
 				link,
 			}),
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 
 	// DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId
@@ -56,9 +48,7 @@ class Api {
 		return fetch(this._baseURL + "/cards/" + cardId, {
 			headers: this._headers,
 			method: "DELETE",
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 
 	//PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
@@ -66,18 +56,14 @@ class Api {
 		return fetch(this._baseURL + "/cards/likes/" + cardId, {
 			headers: this._headers,
 			method: "PUT",
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 	//DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
 	removeLikes(cardId) {
 		return fetch(this._baseURL + "/cards/likes/" + cardId, {
 			headers: this._headers,
 			method: "DELETE",
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 	//PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
 	setAvatar({ avatar }) {
@@ -85,11 +71,9 @@ class Api {
 			headers: this._headers,
 			method: "PATCH",
 			body: JSON.stringify({
-				avatar
+				avatar,
 			}),
-		})
-			.then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-			.catch((err) => console.log(err));
+		}).then((res) => (res.ok ? res.json() : Promise.reject(res.status)));
 	}
 }
 
