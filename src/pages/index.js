@@ -75,9 +75,13 @@ const formPopup = new PopupWithForm({
 	handleSubmitForm: (data) => {
 		handleIsLoading(true, editProfileModal, "Placing info..");
 		api
-			.setUserInfo({ name: data.name, about: data.occupation })
+			.setUserInfo({
+				name: data.name,
+				about: data.occupation,
+				avatar: avatarImage.src,
+			})
 			.then(() => {
-				userInfo.setUserInfo(formName.value, formJob.value);
+				userInfo.setUserInfo(formName.value, formJob.value, avatarImage.src);
 
 				handleIsLoading(false, editProfileModal, "Save");
 				formPopup.close();
@@ -128,92 +132,96 @@ const deleteCard = new PopupWithForm({
 });
 deleteCard.setEventListeners();
 
-api.getAppInfo().then(([userData, cardListData]) => {
-	const userIdInfo = userData._id;
-	//console.log("!!", userData._id);
-	//console.log("11", userIdInfo);
-	userInfo.setUserInfo(userData.name, userData.about);
-	avatarImage.src = userData.avatar;
+api
+	.getAppInfo()
+	.then(([userData, cardListData]) => {
+		const userIdInfo = userData._id;
+		//console.log("!!", userData._id);
+		//console.log("11", userIdInfo);
+		userInfo.setUserInfo(userData.name, userData.about);
+		avatarImage.src = userData.avatar;
 
-	//initial cards autocreated each time the page refreshes
-	//get cards from API
-	//Creates Initial Card set
-	const cardGrid = new Section(
-		{
-			data: cardListData,
-			renderer: placeCards,
-		},
-		photoGrid
-	);
-	cardGrid.renderItems();
-
-	//CardPopup
-	const cardPopup = new PopupWithForm({
-		popupSelector: addCardModal,
-		handleSubmitForm: (data) => {
-			handleIsLoading(true, addCardModal, "Adding...");
-			api
-				.addCard(data)
-
-				.then((res) => {
-					placeCards(res);
-					cardPopup.close();
-					placeCards.showLikes();
-					addCardValidator.makeButtonInactive();
-					placeCards.showRemoveButton();
-				})
-				.catch((err) => console.log(err));
-		},
-	});
-	cardPopup.setEventListeners();
-
-	addCardButton.addEventListener("click", () => {
-		addCardValidator.makeButtonInactive();
-		cardPopup.open();
-	});
-
-	function placeCards(data) {
-		const newCards = new Card(
+		//initial cards autocreated each time the page refreshes
+		//get cards from API
+		//Creates Initial Card set
+		const cardGrid = new Section(
 			{
-				data,
-				handleCardClick: () => {
-					enlargeImage.open(data);
-				},
-				handleCardDelete: (cardId) => {
-					deleteCard.open();
-					deleteCard.setSubmit(() => {
-						handleIsLoading(true, deleteCardModal, "Wait for it....");
-						api.removeCard(cardId).then(() => {
-							newCards.deleteCard();
-							handleIsLoading(false, deleteCardModal, "Goodbye!");
-							deleteCard.close();
-						})
-						.catch((err) => console.log(err));
-					});
-				},
-				handleCardLike: (cardId) => {
-					if (newCards.heartLike.classList.contains("card__like")) {
-						api
-							.removeLikes(cardId)
-							.then((res) => newCards.getTotalLikes(res.likes.length))
-							.then(() => newCards.heartLike.classList.remove("card__like"))
-							.catch((err) => console.log(err));
-					} else {
-						api
-							.addLikes(cardId)
-							.then((res) => newCards.getTotalLikes(res.likes.length))
-							.then(() => newCards.heartLike.classList.add("card__like"))
-							.catch((err) => console.log(err));
-					}
-				},
+				data: cardListData,
+				renderer: placeCards,
 			},
-			cardTemplateSelector,
-			userIdInfo
+			photoGrid
 		);
-		cardGrid.addItem(newCards.createCard());
-	}
-})
-.catch((err) => console.log(err));
+		cardGrid.renderItems();
+
+		//CardPopup
+		const cardPopup = new PopupWithForm({
+			popupSelector: addCardModal,
+			handleSubmitForm: (data) => {
+				handleIsLoading(true, addCardModal, "Adding...");
+				api
+					.addCard(data)
+
+					.then((res) => {
+						placeCards(res);
+						cardPopup.close();
+						placeCards.showLikes();
+						addCardValidator.makeButtonInactive();
+						placeCards.showRemoveButton();
+					})
+					.catch((err) => console.log(err));
+			},
+		});
+		cardPopup.setEventListeners();
+
+		addCardButton.addEventListener("click", () => {
+			addCardValidator.makeButtonInactive();
+			cardPopup.open();
+		});
+
+		function placeCards(data) {
+			const newCards = new Card(
+				{
+					data,
+					handleCardClick: () => {
+						enlargeImage.open(data);
+					},
+					handleCardDelete: (cardId) => {
+						deleteCard.open();
+						deleteCard.setSubmit(() => {
+							handleIsLoading(true, deleteCardModal, "Wait for it....");
+							api
+								.removeCard(cardId)
+								.then(() => {
+									newCards.deleteCard();
+									handleIsLoading(false, deleteCardModal, "Goodbye!");
+									deleteCard.close();
+								})
+								.catch((err) => console.log(err));
+						});
+					},
+					handleCardLike: (cardId) => {
+						if (newCards.heartLike.classList.contains("card__like")) {
+							api
+								.removeLikes(cardId)
+								.then((res) => newCards.getTotalLikes(res.likes.length))
+								.then(() => newCards.heartLike.classList.remove("card__like"))
+								.catch((err) => console.log(err));
+						} else {
+							api
+								.addLikes(cardId)
+								.then((res) => newCards.getTotalLikes(res.likes.length))
+								.then(() => newCards.heartLike.classList.add("card__like"))
+								.catch((err) => console.log(err));
+						}
+					},
+				},
+				cardTemplateSelector,
+				userIdInfo
+			);
+			cardGrid.addItem(newCards.createCard());
+		}
+	})
+	.catch((err) => console.log(err));
 /*function loading(isLoading, modal) {
 	if (isLoading) {
 		modal.querySelector(".modal__button").textContent = "Saving...";

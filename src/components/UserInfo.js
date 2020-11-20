@@ -17,9 +17,10 @@ class UserInfo {
 		};
 	}
 
-	setUserInfo(name, job) {
+	setUserInfo(name, job, avatar) {
 		this._name.textContent = name;
 		this._job.textContent = job;
+		this._avatar.src = avatar;
 	}
 
 	// getter & setter in JS (get / set)
