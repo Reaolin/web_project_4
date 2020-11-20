@@ -5,7 +5,8 @@ const imgPopup = document.querySelector(".modal__img");
 class Card {
 	constructor(
 		{ data, handleCardClick, handleCardDelete, handleCardLike },
-		cardTemplateSelector, userID,
+		cardTemplateSelector,
+		userID
 	) {
 		this._name = data.name;
 		this._link = data.link;
@@ -28,8 +29,6 @@ class Card {
 		return this._id;
 	}
 
-	
-
 	getTotalLikes(allTheLikes) {
 		this._card.querySelector(".card__like-total").textContent = allTheLikes;
 	}
@@ -42,14 +41,12 @@ class Card {
 
 		return cardTemplate;
 	}
- 
 
 	_addEventListener() {
 		const cardImg = this._card.querySelector(".card__img");
-		const cardHeartButton = this._card.querySelector(".card__heart");		
+		const cardHeartButton = this._card.querySelector(".card__heart");
 
 		cardHeartButton.addEventListener("click", () => {
-
 			this._handleCardLike(this.getId());
 			//change heart
 		});
@@ -65,26 +62,24 @@ class Card {
 		});
 	}
 
-showRemoveButton(){
+	showRemoveButton() {
 		//don't show remove button
-		if(this._owner._id !== this._userID){
-			this._cardRemoveButton.style.display = 'none';
+		if (this._owner._id !== this._userID) {
+			this._cardRemoveButton.style.display = "none";
 		}
-}
+	}
 
 	deleteCard() {
 		this._card.remove(".card");
 	}
-	_showLikes() {
+	showLikes() {
 		if (this._likes.some((like) => like._id === this._userID)) {
-			this.heartLike
-				.classList.add("card__like");
-				console.log(this._likes);
-				console.log(this.heartLike);
+			this.heartLike.classList.add("card__like");
+			console.log(this._likes);
+			console.log(this.heartLike);
 		}
 	}
 	createCard() {
-		
 		const cardImage = this._card.querySelector(".card__img");
 
 		this._card.querySelector(".card__title").textContent = this._name; //places the name, from the data, as the text content of the Card Title class and
@@ -93,7 +88,7 @@ showRemoveButton(){
 
 		this._addEventListener();
 		this.getTotalLikes(this._likes.length);
-		this._showLikes();
+		this.showLikes();
 
 		return this._card;
 	}

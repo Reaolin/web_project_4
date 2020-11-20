@@ -21,6 +21,10 @@ class Api {
 			.catch((err) => console.log(err));
   }
 
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()])
+  }
+
 	setUserInfo({ name, about }) {
 		return fetch(this._baseURL + "/users/me", {
 			headers: this._headers,
