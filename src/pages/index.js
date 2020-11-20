@@ -73,13 +73,13 @@ const userInfo = new UserInfo(profileName, profileJob, avatarImage);
 const formPopup = new PopupWithForm({
 	popupSelector: editProfileModal,
 	handleSubmitForm: (data) => {
+		handleIsLoading(true, editProfileModal, "Placing info..");
 		api
 			.setUserInfo({ name: data.name, about: data.occupation })
 			.then(() => {
 				userInfo.setUserInfo(formName.value, formJob.value);
-				loading(false, editProfileModal);
-			})
-			.then(() => {
+
+				handleIsLoading(false, editProfileModal, "Save");
 				formPopup.close();
 			})
 
@@ -161,7 +161,6 @@ api.getAppInfo().then(([userData, cardListData]) => {
 					placeCards.showLikes();
 					addCardValidator.makeButtonInactive();
 					placeCards.showRemoveButton();
-					
 				})
 				.catch((err) => console.log(err));
 		},
