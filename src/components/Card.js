@@ -75,8 +75,8 @@ class Card {
 	showLikes() {
 		if (this._likes.some((like) => like._id === this._userID)) {
 			this.heartLike.classList.add("card__like");
-			console.log(this._likes);
-			console.log(this.heartLike);
+			//console.log(this._likes);
+			//console.log(this.heartLike);
 		}
 	}
 	createCard() {
@@ -89,6 +89,7 @@ class Card {
 		this._addEventListener();
 		this.getTotalLikes(this._likes.length);
 		this.showLikes();
+		this.showRemoveButton();
 
 		return this._card;
 	}

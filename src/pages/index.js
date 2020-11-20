@@ -78,9 +78,8 @@ const formPopup = new PopupWithForm({
 			.then(() => {
 				userInfo.setUserInfo(formName.value, formJob.value);
 				loading(false, editProfileModal);
-				
 			})
-			.then(()=>{
+			.then(() => {
 				formPopup.close();
 			})
 
@@ -129,94 +128,90 @@ const deleteCard = new PopupWithForm({
 });
 deleteCard.setEventListeners();
 
-
-
-api.getUserInfo().then((res) => {
-	const userIdInfo = res._id;
-	console.log("!!", res._id);
-	console.log("11", userIdInfo);
-	userInfo.setUserInfo(res.name, res.about);
-	avatarImage.src = res.avatar;
+api.getAppInfo().then(([userData, cardListData]) => {
+	const userIdInfo = userData._id;
+	//console.log("!!", userData._id);
+	//console.log("11", userIdInfo);
+	userInfo.setUserInfo(userData.name, userData.about);
+	avatarImage.src = userData.avatar;
 
 	//initial cards autocreated each time the page refreshes
 	//get cards from API
-	api.getInitialCards().then((res) => {
-		console.log(res);
-		//Creates Initial Card set
-		const cardGrid = new Section(
-			{
-				data: res,
-				renderer: placeCards,
-			},
-			photoGrid
-		);
-		cardGrid.renderItems();
+	//Creates Initial Card set
+	const cardGrid = new Section(
+		{
+			data: cardListData,
+			renderer: placeCards,
+		},
+		photoGrid
+	);
+	cardGrid.renderItems();
 
-		//CardPopup
-		const cardPopup = new PopupWithForm({
-			popupSelector: addCardModal,
-			handleSubmitForm: (data) => {
-				handleIsLoading(true, addCardModal, "Adding...");
-				api
-					.addCard(data)
-					.then((res) => {
-						placeCards(res);
-						placeCards.showLikes();
-						addCardValidator.makeButtonInactive();
-					})
-					.then(() => {
-						cardPopup.close();
-					})
-					.catch((err) => console.log(err));
-			},
-		});
-		cardPopup.setEventListeners();
+	//CardPopup
+	const cardPopup = new PopupWithForm({
+		popupSelector: addCardModal,
+		handleSubmitForm: (data) => {
+			handleIsLoading(true, addCardModal, "Adding...");
+			api
+				.addCard(data)
 
-		addCardButton.addEventListener("click", () => {
-			addCardValidator.makeButtonInactive();
-			cardPopup.open();
-		});
-
-		function placeCards(data) {
-			const newCards = new Card(
-				{
-					data,
-					handleCardClick: () => {
-						enlargeImage.open(data);
-					},
-					handleCardDelete: (cardId) => {
-						deleteCard.open();
-						deleteCard.setSubmit(() => {
-							handleIsLoading(true, deleteCardModal, "Wait for it....");
-							api.removeCard(cardId).then(() => {
-								newCards.deleteCard();
-								handleIsLoading(false, deleteCardModal, "Goodbye!");
-								deleteCard.close();
-							});
-						});
-					},
-					handleCardLike: (cardId) => {
-						if (newCards.heartLike.classList.contains("card__like")) {
-							api
-								.removeLikes(cardId)
-								.then((res) => newCards.getTotalLikes(res.likes.length))
-								.then(() => newCards.heartLike.classList.remove("card__like"))
-								.catch((err) => console.log(err));
-						} else {
-							api
-								.addLikes(cardId)
-								.then((res) => newCards.getTotalLikes(res.likes.length))
-								.then(() => newCards.heartLike.classList.add("card__like"))
-								.catch((err) => console.log(err));
-						}
-					},
-				},
-				cardTemplateSelector,
-				userIdInfo
-			);
-			cardGrid.addItem(newCards.createCard());
-		}
+				.then((res) => {
+					placeCards(res);
+					cardPopup.close();
+					placeCards.showLikes();
+					addCardValidator.makeButtonInactive();
+					placeCards.showRemoveButton();
+					
+				})
+				.catch((err) => console.log(err));
+		},
 	});
+	cardPopup.setEventListeners();
+
+	addCardButton.addEventListener("click", () => {
+		addCardValidator.makeButtonInactive();
+		cardPopup.open();
+	});
+
+	function placeCards(data) {
+		const newCards = new Card(
+			{
+				data,
+				handleCardClick: () => {
+					enlargeImage.open(data);
+				},
+				handleCardDelete: (cardId) => {
+					deleteCard.open();
+					deleteCard.setSubmit(() => {
+						handleIsLoading(true, deleteCardModal, "Wait for it....");
+						api.removeCard(cardId).then(() => {
+							newCards.deleteCard();
+							handleIsLoading(false, deleteCardModal, "Goodbye!");
+							deleteCard.close();
+						});
+					});
+				},
+				handleCardLike: (cardId) => {
+					if (newCards.heartLike.classList.contains("card__like")) {
+						api
+							.removeLikes(cardId)
+							.then((res) => newCards.getTotalLikes(res.likes.length))
+							.then(() => newCards.heartLike.classList.remove("card__like"))
+							.catch((err) => console.log(err));
+					} else {
+						api
+							.addLikes(cardId)
+							.then((res) => newCards.getTotalLikes(res.likes.length))
+							.then(() => newCards.heartLike.classList.add("card__like"))
+							.catch((err) => console.log(err));
+					}
+				},
+			},
+			cardTemplateSelector,
+			userIdInfo
+		);
+		cardGrid.addItem(newCards.createCard());
+	}
 });
 /*function loading(isLoading, modal) {
 	if (isLoading) {
